@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+    environment:
+      - APP_ENV=development
+      - APP_DEBUG=true
+      - LOG_LEVEL=INFO
+      - LOG_FORMAT=console
+      - DEFAULT_LANGUAGE=en
+    ports:
+      - "8000:8000"
+    command: python -m src
+
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./docs:/app/docs
+    ports:
+      - "8080:8080"
+    command: sphinx-autobuild docs/en _build/html --host 0.0.0.0 --port 8080
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+    environment:
+      - APP_ENV=test
+      - APP_DEBUG=true
+    command: pytest --cov=src --cov-report=html
