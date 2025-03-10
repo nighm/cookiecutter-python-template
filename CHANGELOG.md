@@ -1,42 +1,34 @@
-# 变更日志
+# Changelog
 
-本文档记录项目的所有重要变更。
+All notable changes to this project will be documented in this file.
 
-格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
-版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.0] - 2024-03-19
+## [Unreleased]
 
-### 新增
-- 添加分级代码质量检查系统
-  - 基础级别：基本代码格式和语法检查
-  - 标准级别：增加安全和文档检查
-  - 高级级别：增加深度安全分析和性能检查
-- 添加自动化 GitHub Actions 工作流
-- 添加详细的配置文件和文档
+### Added
+- 添加代码质量检查示例
+- 更新项目配置和CI工作流
+- 优化文档结构
 
-### 变更
-- 更新 pyproject.toml 的依赖管理
-- 优化项目文档结构
+## [0.2.0] - 2024-03-11
 
-## [0.2.0] - 2024-03-18
+### Added
+- 完善项目模板结构
+- 添加多级别代码质量检查
+- 增加详细的中文文档
+- 优化CI/CD配置
 
-### 新增
-- 添加中文文档支持
-- 完善项目模板说明文档
-- 添加示例代码和使用说明
+### Changed
+- 更新依赖版本
+- 改进文档组织结构
+- 优化测试用例
 
-### 变更
-- 重组文档结构，提供更清晰的指南
-- 优化配置文件组织
+## [0.1.0] - 2024-03-10
 
-## [0.1.0] - 2024-03-17
-
-### 新增
-- 初始项目模板结构
-- 基本的项目配置文件
-- GitHub Actions 基础配置
-- 基本的文档框架
-
-### 变更
-- 首次发布基础功能 
+### Added
+- 初始项目模板
+- 基本的项目结构
+- CI/CD配置
+- 文档框架 

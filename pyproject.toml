@@ -2,7 +2,7 @@
 name = "cookiecutter-python-template"
 version = "0.2.0"
 description = "A comprehensive Python project template with enterprise-grade features"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["humingming <nighm@sina.com>"]
 readme = "README.md"
 packages = [{include = "src"}]
 
