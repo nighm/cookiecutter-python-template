@@ -1,0 +1,34 @@
+### Bandit config file generated for standard quality level
+
+# 文件排除模式
+exclude_dirs: ['.git', '__pycache__', 'tests', 'venv', '.env']
+
+# 测试配置
+tests: ['B201', 'B301']
+
+# 跳过的测试
+skips: ['B101', 'B404', 'B603']
+
+# 每个测试的严重程度
+any_other_function_with_shell_equals_true: HIGH
+assert_used: LOW
+hardcoded_bind_all_interfaces: MEDIUM
+hardcoded_password_string: LOW
+hardcoded_tmp_directory: MEDIUM
+linux_commands_wildcard_injection: MEDIUM
+password_config_option_not_marked_secret: MEDIUM
+request_with_no_cert_validation: HIGH
+ssl_with_bad_defaults: MEDIUM
+ssl_with_no_version: MEDIUM
+start_process_with_a_shell: MEDIUM
+start_process_with_no_shell: MEDIUM
+start_process_with_partial_path: MEDIUM
+subprocess_popen_with_shell_equals_true: MEDIUM
+subprocess_without_shell_equals_true: MEDIUM
+try_except_continue: MEDIUM
+try_except_pass: MEDIUM
+weak_cryptographic_key: MEDIUM
+
+# 输出格式配置
+output_format: text
+output_level: ALL 

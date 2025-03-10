@@ -1,0 +1,61 @@
+[MASTER]
+# 使用多个进程来加速检查
+jobs=0
+
+# 添加要在sys.path中的目录
+init-hook='import sys; sys.path.append(".")'
+
+# 要忽略的文件或目录
+ignore=CVS,.git,__pycache__,build,dist,*.egg-info
+
+# 要包含的Python模块
+persistent=yes
+
+# 要加载的插件
+load-plugins=
+
+[MESSAGES CONTROL]
+# 禁用的检查
+disable=C0111,  # missing-docstring
+        C0103,  # invalid-name
+        C0330,  # bad-continuation
+        C0326,  # bad-whitespace
+        W0311,  # bad-indentation
+        W0603,  # global-statement
+        R0903,  # too-few-public-methods
+        R0913,  # too-many-arguments
+        R0914   # too-many-locals
+
+[FORMAT]
+# 最大行长度
+max-line-length=88
+
+# 期望的缩进
+indent-after-paren=4
+
+[BASIC]
+# 好的变量名的正则表达式
+good-names=i,j,k,ex,Run,_,id,pk,x,y
+
+# 坏的变量名的正则表达式
+bad-names=foo,bar,baz,toto,tutu,tata
+
+[VARIABLES]
+# 要检查的变量名的正则表达式
+variable-rgx=[a-z_][a-z0-9_]{2,30}$
+
+[SIMILARITIES]
+# 最小相似行数
+min-similarity-lines=4
+
+[TYPECHECK]
+# 要忽略的模块
+ignored-modules=numpy,tensorflow,torch,cv2
+
+[MISCELLANEOUS]
+# 不要使用 -*- coding: utf-8 -*-
+notes=FIXME,XXX,TODO
+
+[IMPORTS]
+# 要忽略的导入
+ignored-imports= 

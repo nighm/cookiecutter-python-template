@@ -1,0 +1,86 @@
+name: Quality Check
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  {% if cookiecutter.quality_level == "basic" %}
+  basic-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install poetry
+          poetry install
+      - name: Run basic checks
+        run: |
+          poetry run black . --check
+          poetry run isort . --check
+          poetry run flake8
+          poetry run mypy src
+  {% endif %}
+
+  {% if cookiecutter.quality_level == "standard" %}
+  standard-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install poetry
+          poetry install
+      - name: Run standard checks
+        run: |
+          poetry run black . --check
+          poetry run isort . --check
+          poetry run flake8
+          poetry run pylint src tests
+          poetry run bandit -r .
+          poetry run pytest --cov=src --cov-fail-under=80
+  {% endif %}
+
+  {% if cookiecutter.quality_level == "advanced" %}
+  advanced-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install poetry
+          poetry install
+      - name: Run advanced checks
+        run: |
+          poetry run black . --check
+          poetry run isort . --check
+          poetry run flake8
+          poetry run pylint src tests
+          poetry run bandit -r .
+          poetry run pytest --cov=src --cov-fail-under=95
+          poetry run safety check
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Security scan
+        uses: anchore/scan-action@v3
+        with:
+          path: "."
+          fail-build: true
+          severity-cutoff: high
+  {% endif %} 

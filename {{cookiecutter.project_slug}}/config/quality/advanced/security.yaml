@@ -1,0 +1,76 @@
+# 高级安全检查配置
+
+# Bandit高级配置
+bandit:
+  exclude_dirs: ['.git', '__pycache__', 'tests', 'venv', '.env']
+  skips: []  # 不跳过任何安全检查
+  severity: HIGH  # 所有检查使用高严重度
+
+# Safety配置
+safety:
+  ignore_cvss_severity_below: 7.0  # 只关注高危漏洞
+  ignore_unpinned: false  # 不忽略未固定版本的依赖
+  ignore_unknown_versions: false  # 不忽略未知版本
+
+# 敏感信息检查
+secrets:
+  patterns:
+    - type: regex
+      pattern: '(?i)(api[_-]?key|token|secret|password|credential)'
+    - type: entropy
+      min_entropy: 4.5
+  exclude:
+    - '*.md'
+    - '*.rst'
+    - 'tests/'
+
+# 依赖检查
+dependencies:
+  check_outdated: true
+  check_vulnerabilities: true
+  check_licenses: true
+  allowed_licenses:
+    - MIT
+    - BSD
+    - Apache
+    - GPL
+  forbidden_licenses:
+    - AGPL
+
+# 代码注入防护
+injection:
+  check_sql: true
+  check_nosql: true
+  check_os_commands: true
+  check_xpath: true
+  check_ldap: true
+
+# 加密配置
+crypto:
+  min_key_size:
+    RSA: 2048
+    EC: 224
+    DSA: 2048
+  allowed_algorithms:
+    - AES
+    - RSA
+    - ECDSA
+  forbidden_algorithms:
+    - MD5
+    - SHA1
+    - DES
+
+# 安全Headers
+security_headers:
+  required:
+    - X-Content-Type-Options
+    - X-Frame-Options
+    - X-XSS-Protection
+    - Content-Security-Policy
+    - Strict-Transport-Security
+
+# 自动修复建议
+auto_fix:
+  enabled: true
+  safe_fixes_only: true
+  backup_files: true 

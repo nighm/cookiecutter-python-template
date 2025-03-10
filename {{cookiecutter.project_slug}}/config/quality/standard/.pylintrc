@@ -1,0 +1,63 @@
+[MASTER]
+jobs=0
+init-hook='import sys; sys.path.append(".")'
+ignore=CVS,.git,__pycache__,build,dist,*.egg-info
+persistent=yes
+load-plugins=pylint.extensions.docparams,pylint.extensions.docstyle,pylint.extensions.mccabe
+
+[MESSAGES CONTROL]
+disable=C0330,  # bad-continuation
+        C0326,  # bad-whitespace
+        W0311,  # bad-indentation
+        R0913,  # too-many-arguments
+        R0914   # too-many-locals
+
+[FORMAT]
+max-line-length=88
+indent-after-paren=4
+
+[BASIC]
+good-names=i,j,k,ex,Run,_,id,pk,x,y
+bad-names=foo,bar,baz,toto,tutu,tata
+docstring-min-length=10
+
+[VARIABLES]
+variable-rgx=[a-z_][a-z0-9_]{2,30}$
+dummy-variables-rgx=_$|dummy|unused_.*
+
+[SIMILARITIES]
+min-similarity-lines=6
+ignore-comments=yes
+ignore-docstrings=yes
+ignore-imports=yes
+
+[TYPECHECK]
+ignored-modules=numpy,tensorflow,torch,cv2
+generated-members=REQUEST,acl_users,aq_parent,objects
+
+[MISCELLANEOUS]
+notes=FIXME,XXX,TODO
+
+[IMPORTS]
+deprecated-modules=regsub,TERMIOS,Bastion,rexec
+ignored-modules=numpy,tensorflow,torch,cv2
+
+[DESIGN]
+max-args=6
+max-locals=15
+max-returns=6
+max-branches=12
+max-statements=50
+max-parents=7
+max-attributes=7
+min-public-methods=1
+max-public-methods=20
+max-bool-expr=5
+
+[CLASSES]
+ignore-mixin-members=yes
+valid-classmethod-first-arg=cls
+valid-metaclass-classmethod-first-arg=mcs
+
+[EXCEPTIONS]
+overgeneral-exceptions=Exception 
