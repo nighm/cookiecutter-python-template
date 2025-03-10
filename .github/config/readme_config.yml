@@ -77,7 +77,7 @@ categories:
   examples:
     title: "示例代码"
     icon: "📝"
-    pattern: "examples/*.py"
+    pattern: "src/examples/*.py"
     description: "示例代码和使用教程"
     order: 6
   

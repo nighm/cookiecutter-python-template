@@ -80,11 +80,11 @@ poetry run pytest
 ## 📚 模块文档
 <!-- BEGIN_MODULES -->
 ### 📊 文档统计
-- 总文件数：43
-- 总类数：17
-- 总函数数：108
-- 生成用时：0.07 秒
-- 最后更新：2025-03-10 20:46:34
+- 总文件数：44
+- 总类数：18
+- 总函数数：111
+- 生成用时：0.10 秒
+- 最后更新：2025-03-10 21:14:35
 ### ⚙️ 核心功能
 项目的核心功能模块，包含基础服务和主要业务逻辑
 
@@ -634,40 +634,34 @@ Pydantic config class.
 ![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
 
 
-#### 📄 examples.documentation_example
+#### 📄 src.examples.auto_readme_demo
 
-示例模块
+自动更新 README 演示模块.
 
-这个模块展示了如何正确编写Python代码的中文文档。
-包含了类、函数、方法等各种代码元素的标准文档格式。
+这个模块用于演示当添加新的 Python 文件时，
+README.md 会自动更新模块文档。
 
-使用方法:
-    from examples.documentation_example import DataProcessor
-    
-    processor = DataProcessor()
-    result = processor.process_data({"name": "张三"})
+Example:
+    ```python
+    calculator = Calculator()
+    result = calculator.add(1, 2)
+    print(result)  # 输出: 3
+    ```
 
 
 **类：**
 
-#### 📦 DataProcessor
-数据处理器
+#### 📦 Calculator
+一个简单的计算器类.
 
 **功能说明：**
-数据处理器
+一个简单的计算器类.
 
-这个类用于展示如何编写类的文档字符串，包括类的整体说明、
-属性说明、方法说明等。
+这个类提供基本的数学运算功能，包括加法、减法等。
+每个方法都有详细的文档说明。
 
-属性:
-    cache_enabled (bool): 是否启用缓存
-    max_items (int): 最大处理条目数
-    
-示例:
-    ```python
-    processor = DataProcessor(cache_enabled=True)
-    result = processor.process_data({"name": "张三"})
-    ```
+Attributes:
+    history (list): 保存计算历史记录
 
 ![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
 
@@ -677,277 +671,47 @@ Pydantic config class.
 
 **方法：**
 
-- `process_data`：处理输入的数据
+- `add`：执行加法运算.
   <details>
   <summary>详细信息</summary>
 
   **参数：**
   ```python
-  - data (Dict)
+  - a (float)
+  - b (float)
   ```
 
-  **返回值：** `Dict`
+  **返回值：** `float`
 
   **示例：**
   ```python
-  data = {"name": "张三", "age": 30}
-result = processor.process_data(data)
-print(result)  # 输出处理后的数据
+  calc = Calculator()
+result = calc.add(1.5, 2.5)  # 返回 4.0
   ```
   </details>
-- `batch_process`：批量处理多条数据
+- `subtract`：执行减法运算.
   <details>
   <summary>详细信息</summary>
 
   **参数：**
   ```python
-  - items (List[Dict])
+  - a (float)
+  - b (float)
   ```
 
-  **返回值：** `List[Dict]`
+  **返回值：** `float`
 
   **示例：**
   ```python
-  items = [
-{"name": "张三", "age": 30},
-{"name": "李四", "age": 25}
-]
-results = processor.batch_process(items)
+  calc = Calculator()
+result = calc.subtract(5, 3)  # 返回 2
   ```
   </details>
-</details>
-
-
-#### 📦 ConfigManager
-配置管理器
-
-**功能说明：**
-配置管理器
-
-用于管理应用程序的配置信息。
-
-属性:
-    config_path (str): 配置文件路径
-    auto_reload (bool): 是否自动重新加载
-    
-示例:
-    ```python
-    config = ConfigManager("config.yml")
-    db_url = config.get("database.url")
-    ```
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
-<details>
-<summary>查看方法详情</summary>
-
-**方法：**
-
-- `get`：获取配置值
+- `get_history`：获取计算历史记录.
   <details>
   <summary>详细信息</summary>
 
-  **参数：**
-  ```python
-  - key (str)
-  - default (Optional[str])
-  ```
-
-  **返回值：** `Optional[str]`
-
-  **示例：**
-  ```python
-  db_url = config.get("database.url", "sqlite:///db.sqlite3")
-  ```
-  </details>
-</details>
-
-
-**函数：**
-
-#### 🔸 format_date
-格式化日期
-
-**参数：**
-- date (datetime)
-- format_str (str)
-
-**返回值：**
-str
-
-**示例：**
-```python
-from datetime import datetime
-
-now = datetime.now()
-formatted = format_date(now, "%Y年%m月%d日")
-print(formatted)  # 输出: 2024年03月10日
-```
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
-#### 🔸 process_data
-处理输入的数据
-
-**参数：**
-- data (Dict)
-
-**返回值：**
-Dict
-
-**示例：**
-```python
-data = {"name": "张三", "age": 30}
-result = processor.process_data(data)
-print(result)  # 输出处理后的数据
-```
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
-#### 🔸 batch_process
-批量处理多条数据
-
-**参数：**
-- items (List[Dict])
-
-**返回值：**
-List[Dict]
-
-**示例：**
-```python
-items = [
-{"name": "张三", "age": 30},
-{"name": "李四", "age": 25}
-]
-results = processor.batch_process(items)
-```
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
-#### 🔸 get
-获取配置值
-
-**参数：**
-- key (str)
-- default (Optional[str])
-
-**返回值：**
-Optional[str]
-
-**示例：**
-```python
-db_url = config.get("database.url", "sqlite:///db.sqlite3")
-```
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
----
-
-
-#### 📄 examples.example_usage
-
-**函数：**
-
-#### 🔸 main
-暂无描述
-
-**参数：**
-无
-
-**返回值：**
-无
-
-**示例：**
-```python
-暂无示例
-```
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
----
-
-
-#### 📄 examples.secure_login_example
-
-**类：**
-
-#### 📦 Credentials
-用于安全存储用户凭据的模型
-
-**功能说明：**
-用于安全存储用户凭据的模型
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
-**继承自：** BaseModel
-
-#### 📦 SecureCredentialManager
-暂无描述
-
-**功能说明：**
-暂无描述
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
-<details>
-<summary>查看方法详情</summary>
-
-**方法：**
-
-- `save_credentials`：安全地保存加密的凭据
-  <details>
-  <summary>详细信息</summary>
-
-  **参数：**
-  ```python
-  - credentials (Credentials)
-  ```
-
-  **返回值：** `Any`
-
-  </details>
-- `load_credentials`：加载并解密凭据
-  <details>
-  <summary>详细信息</summary>
-
-  **返回值：** `Optional[Credentials]`
-
-  </details>
-</details>
-
-
-#### 📦 AutoLogin
-暂无描述
-
-**功能说明：**
-暂无描述
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
-<details>
-<summary>查看方法详情</summary>
-
-**方法：**
-
-- `login`：执行自动登录流程
-  <details>
-  <summary>详细信息</summary>
-
-  **参数：**
-  ```python
-  - credentials (Optional[Credentials])
-  ```
-
-  **返回值：** `bool`
+  **返回值：** `list`
 
   </details>
 </details>
@@ -955,65 +719,52 @@ db_url = config.get("database.url", "sqlite:///db.sqlite3")
 
 **函数：**
 
-#### 🔸 main
-暂无描述
+#### 🔸 add
+执行加法运算.
 
 **参数：**
-无
+- a (float)
+- b (float)
 
 **返回值：**
-无
+float
 
 **示例：**
 ```python
-暂无示例
+calc = Calculator()
+result = calc.add(1.5, 2.5)  # 返回 4.0
 ```
 
 ![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
 
 
-#### 🔸 save_credentials
-安全地保存加密的凭据
+#### 🔸 subtract
+执行减法运算.
 
 **参数：**
-- credentials (Credentials)
+- a (float)
+- b (float)
 
 **返回值：**
-Any
+float
 
 **示例：**
 ```python
-暂无示例
+calc = Calculator()
+result = calc.subtract(5, 3)  # 返回 2
 ```
 
 ![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
 
 
-#### 🔸 load_credentials
-加载并解密凭据
+#### 🔸 get_history
+获取计算历史记录.
 
 **参数：**
 无
 
 **返回值：**
-Optional[Credentials]
-
-**示例：**
-```python
-暂无示例
-```
-
-![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
-
-
-#### 🔸 login
-执行自动登录流程
-
-**参数：**
-- credentials (Optional[Credentials])
-
-**返回值：**
-bool
+list
 
 **示例：**
 ```python
