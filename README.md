@@ -77,6 +77,1342 @@ poetry run pytest
 └── resources/            # 资源文件
 ```
 
+## 📚 模块文档
+<!-- BEGIN_MODULES -->
+### 📊 文档统计
+- 总文件数：43
+- 总类数：17
+- 总函数数：108
+- 生成用时：0.07 秒
+- 最后更新：2025-03-10 20:46:34
+### ⚙️ 核心功能
+项目的核心功能模块，包含基础服务和主要业务逻辑
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 📄 src.core.cache
+
+缓存管理模块.
+
+
+**类：**
+
+#### 📦 CacheManager
+缓存管理器.
+
+**功能说明：**
+缓存管理器.
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 src.core.compatibility
+
+编码和兼容性配置.
+
+此模块定义了项目范围的编码和兼容性设置，确保所有Python文件的一致性。
+
+
+**函数：**
+
+#### 🔸 check_python_version
+检查Python版本是否满足要求.
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 check_encoding
+检查系统编码设置.
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 verify_environment
+验证运行环境是否满足所有要求.
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 src.core.database
+
+数据库连接管理模块.
+
+
+**类：**
+
+#### 📦 DatabaseManager
+数据库管理器.
+
+**功能说明：**
+数据库管理器.
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 src.core.tasks
+
+任务管理模块.
+
+
+**类：**
+
+#### 📦 TaskManager
+任务管理器.
+
+**功能说明：**
+任务管理器.
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+<details>
+<summary>查看方法详情</summary>
+
+**方法：**
+
+- `background_task`：后台任务装饰器.
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - name (Optional[str])
+  - max_retries (int)
+  - retry_delay (int)
+  ```
+
+  **返回值：** `Callable`
+
+  </details>
+- `schedule_task`：定时任务装饰器.
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - cron (str)
+  - name (Optional[str])
+  - max_instances (int)
+  ```
+
+  **返回值：** `Callable`
+
+  </details>
+- `get_active_tasks`：获取活动任务列表.
+  <details>
+  <summary>详细信息</summary>
+
+  **返回值：** `Any`
+
+  </details>
+</details>
+
+
+**函数：**
+
+#### 🔸 background_task
+后台任务装饰器.
+
+**参数：**
+- name (Optional[str])
+- max_retries (int)
+- retry_delay (int)
+
+**返回值：**
+Callable
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 schedule_task
+定时任务装饰器.
+
+**参数：**
+- cron (str)
+- name (Optional[str])
+- max_instances (int)
+
+**返回值：**
+Callable
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 get_active_tasks
+获取活动任务列表.
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 decorator
+暂无描述
+
+**参数：**
+- func (Callable)
+
+**返回值：**
+Callable
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 decorator
+暂无描述
+
+**参数：**
+- func (Callable)
+
+**返回值：**
+Callable
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+### 🔧 工具模块
+通用工具和辅助功能，提供各种实用函数
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 📄 src.utils.decorators
+
+项目通用装饰器.
+
+提供常用的功能装饰器，如重试、计时和废弃标记等。
+
+
+**函数：**
+
+#### 🔸 retry
+函数调用失败重试装饰器.
+
+**参数：**
+- max_attempts (int)
+- delay (float)
+- backoff_factor (float)
+- exceptions (tuple[])
+
+**返回值：**
+Callable[F]
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 timing
+测量函数执行时间的装饰器.
+
+**参数：**
+- func (F)
+
+**返回值：**
+F
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 deprecated
+标记函数为已废弃的装饰器.
+
+**参数：**
+- func (F)
+
+**返回值：**
+F
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 decorator
+暂无描述
+
+**参数：**
+- func (F)
+
+**返回值：**
+F
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 wrapper
+暂无描述
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 wrapper
+暂无描述
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 wrapper
+暂无描述
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 src.utils.i18n
+
+国际化工具.
+
+提供多语言支持的工具和配置。
+
+
+**函数：**
+
+#### 🔸 setup_i18n
+初始化国际化系统.
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 get_text
+获取指定消息的翻译文本.
+
+**参数：**
+- message (str)
+- lang (Optional[str])
+
+**返回值：**
+str
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 get_supported_languages
+获取支持的语言列表.
+
+**参数：**
+无
+
+**返回值：**
+list[str]
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 src.utils.logging
+
+日志配置和工具.
+
+提供结构化日志记录的配置和实用工具。
+
+
+**函数：**
+
+#### 🔸 configure_logging
+配置应用程序的结构化日志系统.
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 get_logger
+获取日志记录器实例.
+
+**参数：**
+- name (Optional[str])
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+### ⚙️ 配置模块
+项目配置相关的模块，处理配置文件和环境变量
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 📄 src.config.settings
+
+Global settings configuration.
+
+
+**类：**
+
+#### 📦 Settings
+Global settings for the project.
+
+**功能说明：**
+Global settings for the project.
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+**继承自：** BaseSettings
+
+#### 📦 Config
+Pydantic config class.
+
+**功能说明：**
+Pydantic config class.
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+### 📝 示例代码
+示例代码和使用教程
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 📄 examples.documentation_example
+
+示例模块
+
+这个模块展示了如何正确编写Python代码的中文文档。
+包含了类、函数、方法等各种代码元素的标准文档格式。
+
+使用方法:
+    from examples.documentation_example import DataProcessor
+    
+    processor = DataProcessor()
+    result = processor.process_data({"name": "张三"})
+
+
+**类：**
+
+#### 📦 DataProcessor
+数据处理器
+
+**功能说明：**
+数据处理器
+
+这个类用于展示如何编写类的文档字符串，包括类的整体说明、
+属性说明、方法说明等。
+
+属性:
+    cache_enabled (bool): 是否启用缓存
+    max_items (int): 最大处理条目数
+    
+示例:
+    ```python
+    processor = DataProcessor(cache_enabled=True)
+    result = processor.process_data({"name": "张三"})
+    ```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+<details>
+<summary>查看方法详情</summary>
+
+**方法：**
+
+- `process_data`：处理输入的数据
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - data (Dict)
+  ```
+
+  **返回值：** `Dict`
+
+  **示例：**
+  ```python
+  data = {"name": "张三", "age": 30}
+result = processor.process_data(data)
+print(result)  # 输出处理后的数据
+  ```
+  </details>
+- `batch_process`：批量处理多条数据
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - items (List[Dict])
+  ```
+
+  **返回值：** `List[Dict]`
+
+  **示例：**
+  ```python
+  items = [
+{"name": "张三", "age": 30},
+{"name": "李四", "age": 25}
+]
+results = processor.batch_process(items)
+  ```
+  </details>
+</details>
+
+
+#### 📦 ConfigManager
+配置管理器
+
+**功能说明：**
+配置管理器
+
+用于管理应用程序的配置信息。
+
+属性:
+    config_path (str): 配置文件路径
+    auto_reload (bool): 是否自动重新加载
+    
+示例:
+    ```python
+    config = ConfigManager("config.yml")
+    db_url = config.get("database.url")
+    ```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+<details>
+<summary>查看方法详情</summary>
+
+**方法：**
+
+- `get`：获取配置值
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - key (str)
+  - default (Optional[str])
+  ```
+
+  **返回值：** `Optional[str]`
+
+  **示例：**
+  ```python
+  db_url = config.get("database.url", "sqlite:///db.sqlite3")
+  ```
+  </details>
+</details>
+
+
+**函数：**
+
+#### 🔸 format_date
+格式化日期
+
+**参数：**
+- date (datetime)
+- format_str (str)
+
+**返回值：**
+str
+
+**示例：**
+```python
+from datetime import datetime
+
+now = datetime.now()
+formatted = format_date(now, "%Y年%m月%d日")
+print(formatted)  # 输出: 2024年03月10日
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 process_data
+处理输入的数据
+
+**参数：**
+- data (Dict)
+
+**返回值：**
+Dict
+
+**示例：**
+```python
+data = {"name": "张三", "age": 30}
+result = processor.process_data(data)
+print(result)  # 输出处理后的数据
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 batch_process
+批量处理多条数据
+
+**参数：**
+- items (List[Dict])
+
+**返回值：**
+List[Dict]
+
+**示例：**
+```python
+items = [
+{"name": "张三", "age": 30},
+{"name": "李四", "age": 25}
+]
+results = processor.batch_process(items)
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 get
+获取配置值
+
+**参数：**
+- key (str)
+- default (Optional[str])
+
+**返回值：**
+Optional[str]
+
+**示例：**
+```python
+db_url = config.get("database.url", "sqlite:///db.sqlite3")
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 examples.example_usage
+
+**函数：**
+
+#### 🔸 main
+暂无描述
+
+**参数：**
+无
+
+**返回值：**
+无
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 examples.secure_login_example
+
+**类：**
+
+#### 📦 Credentials
+用于安全存储用户凭据的模型
+
+**功能说明：**
+用于安全存储用户凭据的模型
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+**继承自：** BaseModel
+
+#### 📦 SecureCredentialManager
+暂无描述
+
+**功能说明：**
+暂无描述
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+<details>
+<summary>查看方法详情</summary>
+
+**方法：**
+
+- `save_credentials`：安全地保存加密的凭据
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - credentials (Credentials)
+  ```
+
+  **返回值：** `Any`
+
+  </details>
+- `load_credentials`：加载并解密凭据
+  <details>
+  <summary>详细信息</summary>
+
+  **返回值：** `Optional[Credentials]`
+
+  </details>
+</details>
+
+
+#### 📦 AutoLogin
+暂无描述
+
+**功能说明：**
+暂无描述
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+<details>
+<summary>查看方法详情</summary>
+
+**方法：**
+
+- `login`：执行自动登录流程
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - credentials (Optional[Credentials])
+  ```
+
+  **返回值：** `bool`
+
+  </details>
+</details>
+
+
+**函数：**
+
+#### 🔸 main
+暂无描述
+
+**参数：**
+无
+
+**返回值：**
+无
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 save_credentials
+安全地保存加密的凭据
+
+**参数：**
+- credentials (Credentials)
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 load_credentials
+加载并解密凭据
+
+**参数：**
+无
+
+**返回值：**
+Optional[Credentials]
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 login
+执行自动登录流程
+
+**参数：**
+- credentials (Optional[Credentials])
+
+**返回值：**
+bool
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 src.examples.cli
+
+命令行工具示例.
+
+
+**函数：**
+
+#### 🔸 cli
+项目管理CLI工具.
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 status
+检查系统状态.
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 cache_op
+缓存操作.
+
+**参数：**
+- key (str)
+- value (Optional[str])
+- ttl (Optional[int])
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 clear_cache
+清除所有缓存.
+
+**参数：**
+无
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 src.examples.web_app
+
+示例Web应用.
+
+
+**类：**
+
+#### 📦 MetricsMiddleware
+指标收集中间件.
+
+**功能说明：**
+指标收集中间件.
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+**继承自：** BaseHTTPMiddleware
+
+---
+
+### 📊 监控模块
+系统监控和指标收集模块
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 📄 src.monitoring.health
+
+健康检查模块.
+
+
+**类：**
+
+#### 📦 HealthStatus
+健康状态模型.
+
+**功能说明：**
+健康状态模型.
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+**继承自：** BaseModel
+
+#### 📦 HealthCheck
+健康检查类.
+
+**功能说明：**
+健康检查类.
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+<details>
+<summary>查看方法详情</summary>
+
+**方法：**
+
+- `add_check`：添加检查项.
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - name (str)
+  ```
+
+  **返回值：** `Any`
+
+  </details>
+- `check_health`：基础健康检查.
+  <details>
+  <summary>详细信息</summary>
+
+  **返回值：** `HealthStatus`
+
+  </details>
+- `check_liveness`：Kubernetes存活检查.
+  <details>
+  <summary>详细信息</summary>
+
+  **返回值：** `HealthStatus`
+
+  </details>
+</details>
+
+
+**函数：**
+
+#### 🔸 add_check
+添加检查项.
+
+**参数：**
+- name (str)
+
+**返回值：**
+Any
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 check_health
+基础健康检查.
+
+**参数：**
+无
+
+**返回值：**
+HealthStatus
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 check_liveness
+Kubernetes存活检查.
+
+**参数：**
+无
+
+**返回值：**
+HealthStatus
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+
+#### 📄 src.monitoring.metrics
+
+指标监控模块.
+
+
+**类：**
+
+#### 📦 MetricsManager
+指标管理类.
+
+**功能说明：**
+指标管理类.
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+<details>
+<summary>查看方法详情</summary>
+
+**方法：**
+
+- `counter`：创建计数器指标.
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - name (str)
+  - description (str)
+  - labels (Any)
+  ```
+
+  **返回值：** `Counter`
+
+  </details>
+- `gauge`：创建仪表盘指标.
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - name (str)
+  - description (str)
+  - labels (Any)
+  ```
+
+  **返回值：** `Gauge`
+
+  </details>
+- `histogram`：创建直方图指标.
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - name (str)
+  - description (str)
+  - labels (Any)
+  - buckets (Any)
+  ```
+
+  **返回值：** `Histogram`
+
+  </details>
+- `summary`：创建摘要指标.
+  <details>
+  <summary>详细信息</summary>
+
+  **参数：**
+  ```python
+  - name (str)
+  - description (str)
+  - labels (Any)
+  ```
+
+  **返回值：** `Summary`
+
+  </details>
+</details>
+
+
+**函数：**
+
+#### 🔸 counter
+创建计数器指标.
+
+**参数：**
+- name (str)
+- description (str)
+- labels (Any)
+
+**返回值：**
+Counter
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 gauge
+创建仪表盘指标.
+
+**参数：**
+- name (str)
+- description (str)
+- labels (Any)
+
+**返回值：**
+Gauge
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 histogram
+创建直方图指标.
+
+**参数：**
+- name (str)
+- description (str)
+- labels (Any)
+- buckets (Any)
+
+**返回值：**
+Histogram
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+#### 🔸 summary
+创建摘要指标.
+
+**参数：**
+- name (str)
+- description (str)
+- labels (Any)
+
+**返回值：**
+Summary
+
+**示例：**
+```python
+暂无示例
+```
+
+![Status](https://img.shields.io/badge/status-active-success) ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) ![LastUpdate](https://img.shields.io/badge/last_update-2025---03---10-informational)
+
+
+---
+
+<!-- END_MODULES -->
+
 ## 💻 开发指南
 
 ### 配置开发环境

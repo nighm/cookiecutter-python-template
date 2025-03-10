@@ -1,0 +1,149 @@
+# 要忽略的目录和文件
+ignore_patterns:
+  - 'venv/**'
+  - '.git/**'
+  - '**/test_*.py'
+  - '**/__pycache__/**'
+  - '**/*.pyc'
+  - 'build/**'
+  - 'dist/**'
+  - '.github/**'
+  - 'docs/**'
+
+# 文档生成配置
+doc_options:
+  language: 'zh_CN'           # 文档语言：zh_CN（中文）或 en_US（英文）
+  include_private_methods: false  # 是否包含私有方法
+  include_module_doc: true       # 是否包含模块级文。档
+  include_parameters: true       # 是否包含参数信息
+  include_return_type: true      # 是否包含返回值类型
+  include_examples: true         # 是否包含示例代码
+  max_doc_length: 100           # 文档字符串最大长度
+  watch_mode: false             # 是否启用文件监控模式
+  watch_delay: 2                # 文件变更后等待多少秒更新文档
+  watch_patterns: ['*.py']      # 要监控的文件类型
+  show_statistics: true         # 是否显示文档统计信息
+  group_by_type: true          # 是否按类型分组显示
+  collapse_long_sections: true  # 是否折叠长段落
+  max_example_length: 200      # 示例代码最大长度
+
+# 文档样式
+style:
+  use_emojis: true             # 是否使用表情图标
+  show_line_numbers: false     # 是否显示代码行号
+  show_source_link: true       # 是否显示源代码链接
+  theme: 'default'             # 文档主题：default, dark, light
+  code_theme: 'github'         # 代码高亮主题
+  heading_style: 'atx'         # 标题样式：atx (#), setext (---)
+  link_style: 'reference'      # 链接样式：inline, reference
+
+# 模块分类和图标
+categories:
+  core:
+    title: "核心功能"
+    icon: "⚙️"
+    pattern: "src/core/*.py"
+    description: "项目的核心功能模块，包含基础服务和主要业务逻辑"
+    order: 1                   # 显示顺序
+  
+  utils:
+    title: "工具模块"
+    icon: "🔧"
+    pattern: "src/utils/*.py"
+    description: "通用工具和辅助功能，提供各种实用函数"
+    order: 2
+  
+  config:
+    title: "配置模块"
+    icon: "⚙️"
+    pattern: "src/config/*.py"
+    description: "项目配置相关的模块，处理配置文件和环境变量"
+    order: 3
+  
+  api:
+    title: "接口模块"
+    icon: "🌐"
+    pattern: "src/api/*.py"
+    description: "API接口相关的模块，处理外部请求和响应"
+    order: 4
+  
+  models:
+    title: "数据模型"
+    icon: "📊"
+    pattern: "src/models/*.py"
+    description: "数据模型定义，包含数据库模型和数据结构"
+    order: 5
+  
+  examples:
+    title: "示例代码"
+    icon: "📝"
+    pattern: "examples/*.py"
+    description: "示例代码和使用教程"
+    order: 6
+  
+  monitoring:
+    title: "监控模块"
+    icon: "📊"
+    pattern: "src/monitoring/*.py"
+    description: "系统监控和指标收集模块"
+    order: 7
+
+# 文档模板
+templates:
+  module_header: |
+    ### {icon} {title}
+    {description}
+    
+    {badges}
+    
+  class_header: |
+    #### 📦 {class_name}
+    {class_description}
+    
+    **功能说明：**
+    {doc_string}
+    
+    {badges}
+    
+  function_header: |
+    #### 🔸 {function_name}
+    {function_description}
+    
+    **参数：**
+    {parameters}
+    
+    **返回值：**
+    {returns}
+    
+    **示例：**
+    ```python
+    {example}
+    ```
+    
+    {badges}
+
+# 徽章配置
+badges:
+  show: true                 # 是否显示徽章
+  types:
+    - coverage              # 测试覆盖率
+    - status               # 模块状态
+    - version             # 版本号
+    - last_update        # 最后更新时间
+
+# 自动生成示例代码
+generate_examples: true
+example_template: |
+  # 使用示例
+  ```python
+  {example_code}
+  ```
+
+# 文档导出
+export:
+  formats:
+    - html                # 导出HTML格式
+    - pdf                # 导出PDF格式
+    - markdown           # 导出Markdown格式
+  output_dir: 'docs'     # 导出目录
+  template: 'default'    # 导出模板 

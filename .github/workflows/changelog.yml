@@ -1,0 +1,40 @@
+name: Changelog Validation
+
+on:
+  push:
+    paths:
+      - 'CHANGELOG.md'
+      - '.github/workflows/changelog.yml'
+  pull_request:
+    paths:
+      - 'CHANGELOG.md'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Validate CHANGELOG format
+        run: |
+          python scripts/validate_changelog.py
+
+      - name: Check conventional commits
+        uses: webiny/action-conventional-commits@v1.1.0
+
+      - name: Validate semantic version
+        run: |
+          VERSION=$(grep -m 1 -oP '## \[\K[^\]]+' CHANGELOG.md | head -1)
+          if [[ "$VERSION" != "未发布" ]]; then
+            if ! echo "$VERSION" | grep -P '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$' > /dev/null; then
+              echo "Error: Invalid semantic version: $VERSION"
+              exit 1
+            fi
+          fi
