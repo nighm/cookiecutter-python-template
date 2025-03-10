@@ -1,0 +1,82 @@
+# README 更新配置
+update_rules:
+  module_docs:
+    enabled: true
+    triggers:
+      - 'src/**/*.py'
+    update_frequency: 'on_change'
+    max_entries_per_module: 5
+    
+  examples:
+    enabled: true
+    triggers:
+      - 'examples/**/*.py'
+      - 'src/**/*.py'
+    update_frequency: 'on_change'
+    max_examples: 3
+    
+  version:
+    enabled: true
+    triggers:
+      - 'pyproject.toml'
+    update_frequency: 'on_change'
+    
+  statistics:
+    enabled: true
+    triggers:
+      - 'src/**/*.py'
+    update_frequency: 'weekly'
+    
+  badges:
+    enabled: true
+    triggers:
+      - 'pyproject.toml'
+      - '.github/workflows/*.yml'
+    update_frequency: 'on_change'
+
+# 文档模板
+templates:
+  module_header: |
+    ### {icon} {title}
+    {description}
+    
+  class_header: |
+    #### 📦 {class_name}
+    {class_description}
+    
+  function_header: |
+    #### 🔸 {function_name}
+    {function_description}
+
+# 分类配置
+categories:
+  core:
+    title: "核心功能"
+    icon: "⚙️"
+    pattern: "src/core/*.py"
+    description: "核心功能模块"
+    
+  utils:
+    title: "工具模块"
+    icon: "🔧"
+    pattern: "src/utils/*.py"
+    description: "通用工具和辅助功能"
+
+# 样式配置
+style:
+  use_emojis: true
+  show_line_numbers: false
+  show_source_link: false
+  compact_mode: true
+
+# 文档选项
+doc_options:
+  language: 'zh_CN'
+  include_private_methods: false
+  include_module_doc: true
+  include_parameters: true
+  include_return_type: true
+  include_examples: true
+  max_doc_length: 100
+  watch_mode: false
+  watch_delay: 2 

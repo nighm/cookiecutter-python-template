@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["{{ cookiecutter.python_version }}"]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+
+    - name: Install dependencies
+      run: poetry install
+
+{% if cookiecutter.use_pytest == 'y' %}
+    - name: Run tests
+      run: poetry run pytest --cov
+{% endif %}
+
+{% if cookiecutter.use_black == 'y' %}
+    - name: Check formatting
+      run: poetry run black --check .
+{% endif %}
+
+{% if cookiecutter.use_mypy == 'y' %}
+    - name: Type check
+      run: poetry run mypy .
+{% endif %} 
