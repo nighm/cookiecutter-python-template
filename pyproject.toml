@@ -1,54 +1,62 @@
+# Poetry 项目配置文件
 [tool.poetry]
-name = "cookiecutter-python-template"
-version = "0.2.0"
-description = "A comprehensive Python project template with enterprise-grade features"
-authors = ["humingming <nighm@sina.com>"]
-readme = "README.md"
-packages = [{include = "src"}]
+name = "cookiecutter-python-template"  # 项目名称
+version = "0.2.0"  # 项目版本
+description = "A comprehensive Python project template with enterprise-grade features"  # 项目描述
+authors = ["humingming <nighm@sina.com>"]  # 作者信息
+readme = "README.md"  # README文件路径
+packages = [{include = "src"}]  # 包含的源代码目录
 
+# 项目依赖配置
 [tool.poetry.dependencies]
-python = ">=3.8"
-pydantic = "^2.0"
-python-dotenv = "^1.0.0"
-structlog = "^23.1.0"
-# 添加数据库支持
-sqlalchemy = "^2.0"
-psycopg2 = { version = "^2.9", optional = true }
+python = ">=3.8"  # Python版本要求
+pydantic = "^2.0"  # 数据验证库
+python-dotenv = "^1.0.0"  # 环境变量管理
+structlog = "^23.1.0"  # 结构化日志
+# 数据库支持
+sqlalchemy = "^2.0"  # SQL ORM
+psycopg2 = { version = "^2.9", optional = true }  # PostgreSQL驱动
 
+# 开发依赖配置
 [tool.poetry.group.dev.dependencies]
-pytest = ">=8.2.0"
-pytest-cov = "^4.1.0"
-black = "^23.7.0"
-isort = "^5.12.0"
-mypy = "^1.4.1"
-pre-commit = "^3.3.3"
-sphinx = "^7.0.1"
-sphinx-rtd-theme = "^1.2.2"
-pytest-asyncio = "^0.25.3"
-pylint = "^3.3.5"
-bandit = "^1.8.3"
+pytest = ">=8.2.0"  # 测试框架
+pytest-cov = "^4.1.0"  # 测试覆盖率
+black = "^23.7.0"  # 代码格式化
+isort = "^5.12.0"  # 导入排序
+mypy = "^1.4.1"  # 类型检查
+pre-commit = "^3.3.3"  # Git提交钩子
+sphinx = "^7.0.1"  # 文档生成
+sphinx-rtd-theme = "^1.2.2"  # Sphinx主题
+pytest-asyncio = "^0.25.3"  # 异步测试支持
+pylint = "^3.3.5"  # 代码分析
+bandit = "^1.8.3"  # 安全检查
 
+# 构建系统配置
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]  # 构建依赖
+build-backend = "poetry.core.masonry.api"  # 构建后端
 
+# Black代码格式化配置
 [tool.black]
-line-length = 88
-target-version = ['py38']
-include = '\.pyi?$'
+line-length = 88  # 行长度限制
+target-version = ['py38']  # 目标Python版本
+include = '\.pyi?$'  # 包含的文件类型
 
+# isort导入排序配置
 [tool.isort]
-profile = "black"
-multi_line_output = 3
+profile = "black"  # 使用black兼容配置
+multi_line_output = 3  # 多行输出风格
 
+# MyPy类型检查配置
 [tool.mypy]
-python_version = "3.8"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
+python_version = "3.8"  # Python版本
+warn_return_any = true  # 警告返回Any类型
+warn_unused_configs = true  # 警告未使用的配置
+disallow_untyped_defs = true  # 禁止未类型化的定义
 
+# Pytest测试配置
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-addopts = "-v --cov=src --cov-report=html"
-asyncio_mode = "auto"
+testpaths = ["tests"]  # 测试文件路径
+python_files = ["test_*.py"]  # 测试文件模式
+addopts = "-v --cov=src --cov-report=html"  # 测试选项
+asyncio_mode = "auto"  # 异步模式配置

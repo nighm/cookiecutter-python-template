@@ -1,99 +1,109 @@
+# Poetry 项目配置文件
 [tool.poetry]
-name = "{{ cookiecutter.project_slug }}"
-version = "0.1.0"
-description = "{{ cookiecutter.description }}"
-authors = ["{{ cookiecutter.author }} <{{ cookiecutter.email }}>"]
-readme = "README.md"
-packages = [{include = "src"}]
+name = "{{ cookiecutter.project_slug }}"  # 项目名称
+version = "0.1.0"  # 项目版本
+description = "{{ cookiecutter.description }}"  # 项目描述
+authors = ["{{ cookiecutter.author }} <{{ cookiecutter.email }}>"]  # 作者信息
+readme = "README.md"  # README文件路径
+packages = [{include = "src"}]  # 包含的源代码目录
 
+# 项目依赖配置
 [tool.poetry.dependencies]
-python = ">=3.8.1,<4.0"
+python = ">=3.8.1,<4.0"  # Python版本要求
 {% if cookiecutter.use_mkdocs == 'y' %}
-mkdocs = "^1.5.0"
-mkdocs-material = "^9.0.0"
-mkdocstrings = {extras = ["python"], version = "^0.24.0"}
+# 文档工具依赖
+mkdocs = "^1.5.0"  # MkDocs文档生成器
+mkdocs-material = "^9.0.0"  # Material主题
+mkdocstrings = {extras = ["python"], version = "^0.24.0"}  # Python文档字符串支持
 {% endif %}
 
+# 开发依赖配置
 [tool.poetry.group.dev.dependencies]
 {% if cookiecutter.quality_level == "basic" %}
 # 基础级别依赖
-black = "^24.0"
-isort = "^5.13.0"
-flake8 = "^7.0.0"
-mypy = "^1.8.0"
-pytest = "^8.0"
+black = "^24.0"  # 代码格式化工具
+isort = "^5.13.0"  # 导入语句排序工具
+flake8 = "^7.0.0"  # 代码风格检查工具
+mypy = "^1.8.0"  # 类型检查工具
+pytest = "^8.0"  # 测试框架
 {% endif %}
 
 {% if cookiecutter.quality_level == "standard" %}
 # 标准级别依赖（包含基础级别）
-black = "^24.0"
-isort = "^5.13.0"
-flake8 = "^7.0.0"
-mypy = "^1.8.0"
-pytest = "^8.0"
-pytest-cov = "^4.1.0"
-pylint = "^3.0.0"
-bandit = "^1.7.7"
+black = "^24.0"  # 代码格式化工具
+isort = "^5.13.0"  # 导入语句排序工具
+flake8 = "^7.0.0"  # 代码风格检查工具
+mypy = "^1.8.0"  # 类型检查工具
+pytest = "^8.0"  # 测试框架
+pytest-cov = "^4.1.0"  # 测试覆盖率工具
+pylint = "^3.0.0"  # 代码分析工具
+bandit = "^1.7.7"  # 安全性检查工具
 {% endif %}
 
 {% if cookiecutter.quality_level == "advanced" %}
 # 高级级别依赖（包含标准级别）
-black = "^24.0"
-isort = "^5.13.0"
-flake8 = "^7.0.0"
-mypy = "^1.8.0"
-pytest = "^8.0"
-pytest-cov = "^4.1.0"
-pylint = "^3.0.0"
-bandit = "^1.7.7"
-safety = "^2.3.0"
-xenon = "^0.9.1"
-radon = "^6.0.1"
+black = "^24.0"  # 代码格式化工具
+isort = "^5.13.0"  # 导入语句排序工具
+flake8 = "^7.0.0"  # 代码风格检查工具
+mypy = "^1.8.0"  # 类型检查工具
+pytest = "^8.0"  # 测试框架
+pytest-cov = "^4.1.0"  # 测试覆盖率工具
+pylint = "^3.0.0"  # 代码分析工具
+bandit = "^1.7.7"  # 安全性检查工具
+safety = "^2.3.0"  # 依赖安全检查工具
+xenon = "^0.9.1"  # 代码复杂度检查工具
+radon = "^6.0.1"  # 代码质量度量工具
 {% endif %}
 
+# 构建系统配置
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]  # 构建依赖
+build-backend = "poetry.core.masonry.api"  # 构建后端
 
 {% if cookiecutter.use_black == 'y' %}
+# Black代码格式化配置
 [tool.black]
-line-length = 88
-target-version = ["py38"]
-include = '\.pyi?$'
+line-length = 88  # 行长度限制
+target-version = ["py38"]  # 目标Python版本
+include = '\.pyi?$'  # 包含的文件类型
 {% endif %}
 
 {% if cookiecutter.use_mypy == 'y' %}
+# MyPy类型检查配置
 [tool.mypy]
-python_version = "{{ cookiecutter.python_version }}"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
+python_version = "{{ cookiecutter.python_version }}"  # Python版本
+warn_return_any = true  # 警告返回Any类型
+warn_unused_configs = true  # 警告未使用的配置
+disallow_untyped_defs = true  # 禁止未类型化的定义
 {% endif %}
 
+# Pytest测试配置
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-addopts = "-v --cov=src --cov-report=term-missing"
-pythonpath = ["."]
+testpaths = ["tests"]  # 测试文件路径
+python_files = ["test_*.py"]  # 测试文件模式
+addopts = "-v --cov=src --cov-report=term-missing"  # 测试选项
+pythonpath = ["."]  # Python路径
 
+# isort导入排序配置
 [tool.isort]
-profile = "black"
-multi_line_output = 3
-include_trailing_comma = true
-force_grid_wrap = 0
-use_parentheses = true
-ensure_newline_before_comments = true
-line_length = 88
+profile = "black"  # 使用black兼容配置
+multi_line_output = 3  # 多行输出风格
+include_trailing_comma = true  # 包含尾随逗号
+force_grid_wrap = 0  # 强制网格换行
+use_parentheses = true  # 使用括号
+ensure_newline_before_comments = true  # 确保注释前换行
+line_length = 88  # 行长度限制
 
+# 测试覆盖率配置
 [tool.coverage.run]
-source = ["src"]
-omit = ["tests/*"]
+source = ["src"]  # 源代码目录
+omit = ["tests/*"]  # 忽略的文件
 
 [tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "if __name__ == .__main__.:",
-    "raise NotImplementedError",
-    "if TYPE_CHECKING:",
+exclude_lines = [  # 排除的行
+    "pragma: no cover",  # 不覆盖的标记
+    "def __repr__",  # repr方法
+    "if __name__ == .__main__.:",  # 主程序入口
+    "raise NotImplementedError",  # 未实现的方法
+    "if TYPE_CHECKING:",  # 类型检查条件
 ] 
