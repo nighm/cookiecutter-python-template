@@ -8,18 +8,20 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["{{ cookiecutter.python_version }}"]
+        os: {{ cookiecutter.os_list }}
+        python-version: {{ cookiecutter.python_versions }}
 
     steps:
     - uses: actions/checkout@v3
     
-    - name: Set up Python
+    - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
     
     - name: Install Poetry
       run: |
