@@ -1,7 +1,7 @@
 # Poetry 项目配置文件
 [tool.poetry]
 name = "cookiecutter-python-template"  # 项目名称
-version = "0.1.0"  # 项目版本
+version = "0.2.0"  # 项目版本
 description = "A production-ready Python project template with comprehensive code quality tools"  # 项目描述
 authors = ["Your Name <your.email@example.com>"]  # 作者信息
 readme = "README.md"  # README文件路径
