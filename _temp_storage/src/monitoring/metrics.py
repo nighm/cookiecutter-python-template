@@ -12,10 +12,7 @@ class MetricsManager:
         self._metrics: Dict[str, Union[Counter, Gauge, Histogram, Summary]] = {}
 
     def counter(
-        self,
-        name: str,
-        description: str,
-        labels: Optional[List[str]] = None
+        self, name: str, description: str, labels: Optional[List[str]] = None
     ) -> Counter:
         """创建计数器指标.
 
@@ -32,10 +29,7 @@ class MetricsManager:
         return self._metrics[name]  # type: ignore
 
     def gauge(
-        self,
-        name: str,
-        description: str,
-        labels: Optional[List[str]] = None
+        self, name: str, description: str, labels: Optional[List[str]] = None
     ) -> Gauge:
         """创建仪表盘指标.
 
@@ -56,7 +50,7 @@ class MetricsManager:
         name: str,
         description: str,
         labels: Optional[List[str]] = None,
-        buckets: Optional[List[float]] = None
+        buckets: Optional[List[float]] = None,
     ) -> Histogram:
         """创建直方图指标.
 
@@ -71,18 +65,12 @@ class MetricsManager:
         """
         if name not in self._metrics:
             self._metrics[name] = Histogram(
-                name,
-                description,
-                labels or [],
-                buckets=buckets
+                name, description, labels or [], buckets=buckets
             )
         return self._metrics[name]  # type: ignore
 
     def summary(
-        self,
-        name: str,
-        description: str,
-        labels: Optional[List[str]] = None
+        self, name: str, description: str, labels: Optional[List[str]] = None
     ) -> Summary:
         """创建摘要指标.
 

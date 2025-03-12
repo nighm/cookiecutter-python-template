@@ -1,0 +1,51 @@
+# 标准级别检查配置
+
+[black]
+enabled = true
+line-length = 88
+target-version = ["py38"]
+include = '\.pyi?$'
+
+[isort]
+enabled = true
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[ruff]
+enabled = true
+line-length = 88
+target-version = "py38"
+select = ["E", "F", "B", "I", "N"]  # 增加了更多检查规则
+
+[mypy]
+enabled = true
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true  # 标准级别要求类型注解
+check_untyped_defs = true
+
+[pytest]
+enabled = true
+addopts = "-v --cov=src --cov-report=term-missing"
+min_coverage = 80  # 要求80%的测试覆盖率
+
+[pylint]
+enabled = true
+disable = [
+    "C0111",  # missing-docstring
+    "C0103",  # invalid-name
+    "C0330",  # wrong-hanging-indentation
+]
+
+[bandit]
+enabled = true
+exclude_dirs = ["tests"]
+skips = ["B101"]  # 跳过一些基本的安全检查
+
+[vulture]
+enabled = true
+min_confidence = 80
+paths = ["src"]
+exclude = ["tests/"] 

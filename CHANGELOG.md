@@ -1,37 +1,46 @@
-# Changelog | 更新日志
+# 更新日志
 
-All notable changes to this project will be documented in this file.
 本项目的所有重要更改都将记录在此文件中。
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-格式基于[Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
-版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)规范。
+格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
+并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## [Unreleased | 未发布]
+## [0.1.0] - 2025-03-11
 
-### Added | 新增
-- 添加代码质量检查示例 | Added code quality check examples
-- 更新项目配置和CI工作流 | Updated project configuration and CI workflow
-- 优化文档结构 | Optimized documentation structure
+### ✨ 新增
+- 初始版本发布
+- 支持 Python 3.11+ (推荐 3.11.8)
+- 集成最新版本的代码质量工具：
+  - Black (^24.2.0)
+  - Ruff (^0.3.0)
+  - MyPy (^1.8.0)
+  - Bandit (^1.7.7)
+  - isort (^5.13.2)
+- 添加测试框架支持：
+  - pytest (^8.0.1)
+  - pytest-cov (^4.1.0)
+  - pytest-asyncio (^0.23.5)
+- 添加文档工具：
+  - Sphinx (^7.2.6)
+  - sphinx-rtd-theme (^2.0.0)
+- 集成核心依赖：
+  - pydantic (^2.6.3)
+  - python-dotenv (^1.0.1)
+  - structlog (^24.1.0)
+  - sqlalchemy (^2.0.27)
 
-## [0.2.0] - 2024-03-11
+### 🔧 优化
+- 移除了对 Python 3.11 以下版本的支持
+- 移除了 pytype 和 scalene 工具（兼容性问题）
+- 优化了代码质量检查的配置
+- 改进了项目文档结构
 
-### Added | 新增
-- 完善项目模板结构 | Enhanced project template structure
-- 添加多级别代码质量检查 | Added multi-level code quality checks
-- 增加详细的中文文档 | Added detailed Chinese documentation
-- 优化CI/CD配置 | Optimized CI/CD configuration
+### 🐛 修复
+- 修复了 pre-commit 配置问题
+- 修复了 isort 配置中缺少的参数
+- 修复了部分文件的格式化问题
 
-### Changed | 变更
-- 更新依赖版本 | Updated dependency versions
-- 改进文档组织结构 | Improved documentation organization
-- 优化测试用例 | Enhanced test cases
-
-## [0.1.0] - 2024-03-10
-
-### Added | 新增
-- 初始项目模板 | Initial project template
-- 基本的项目结构 | Basic project structure
-- CI/CD配置 | CI/CD configuration
-- 文档框架 | Documentation framework 
+### 📝 文档
+- 更新了 README.md，使用更清晰的结构
+- 添加了详细的代码质量配置说明
+- 添加了质量检查示例 

@@ -53,7 +53,7 @@ async def test_session_rollback(db_manager: DatabaseManager) -> None:
     with pytest.raises(Exception):
         async with db_manager.session() as session:
             await session.execute("SELECT * FROM non_existent_table")
-    
+
     # 确保可以继续使用新会话
     async with db_manager.session() as session:
         result = await session.execute("SELECT 1")

@@ -44,14 +44,10 @@ async def collect_stats() -> None:
             "timestamp": datetime.now().isoformat(),
             "active_tasks": len(task_manager.get_active_tasks()),
             "memory_usage": "128MB",  # 示例值
-            "cpu_usage": "25%"  # 示例值
+            "cpu_usage": "25%",  # 示例值
         }
         # 保存到缓存
-        await cache.set(
-            f"stats:{stats['timestamp']}",
-            str(stats),
-            expire=3600  # 1小时过期
-        )
+        await cache.set(f"stats:{stats['timestamp']}", str(stats), expire=3600)  # 1小时过期
         logger.info("统计数据收集完成")
     except Exception as e:
         logger.error("统计数据收集失败", exc_info=e)

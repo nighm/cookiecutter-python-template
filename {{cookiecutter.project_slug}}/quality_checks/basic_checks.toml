@@ -1,0 +1,30 @@
+# 基础级别检查配置
+
+[black]
+enabled = true
+line-length = 88
+target-version = ["py38"]
+include = '\.pyi?$'
+
+[isort]
+enabled = true
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[ruff]
+enabled = true
+line-length = 88
+target-version = "py38"
+select = ["E", "F"]  # 只检查基本错误和语法错误
+
+[mypy]
+enabled = true
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false  # 基础级别不强制要求类型注解
+
+[pytest]
+enabled = true
+addopts = "-v"  # 基础级别不要求覆盖率报告 

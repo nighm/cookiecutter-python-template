@@ -74,7 +74,7 @@ class ResourceManager(Generic[T]):
             exc_tb: 异常回溯
         """
         async with self._lock:
-            if hasattr(self._resource, 'close'):
+            if hasattr(self._resource, "close"):
                 await self._resource.close()
             self._resource = None
 
@@ -127,12 +127,11 @@ class DataProcessor:
             raise ValueError("chunk_size must be positive")
 
         for i in range(0, len(items), chunk_size):
-            chunk = items[i:i + chunk_size]
+            chunk = items[i : i + chunk_size]
             with self.performance_logging(f"Processing chunk {i//chunk_size}"):
                 # 使用线程池处理计算密集型任务
                 results = await asyncio.get_event_loop().run_in_executor(
-                    self._executor,
-                    lambda: [float(x) * 2 for x in chunk]
+                    self._executor, lambda: [float(x) * 2 for x in chunk]
                 )
                 yield results
 
@@ -188,4 +187,4 @@ async def test_data_processor():
         assert all(isinstance(x, float) for x in batch)
 
     assert batch_count == 3
-    assert total_items == len(test_data) 
+    assert total_items == len(test_data)

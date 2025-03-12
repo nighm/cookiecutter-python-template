@@ -65,6 +65,7 @@ def cache_op(key: str, value: Optional[str], ttl: Optional[int]) -> None:
         value: 缓存值（如果不提供则为获取操作）
         ttl: 过期时间
     """
+
     async def _cache_op() -> None:
         if value is None:
             # 获取缓存
@@ -91,6 +92,7 @@ def cache_op(key: str, value: Optional[str], ttl: Optional[int]) -> None:
 @cli.command()
 def clear_cache() -> None:
     """清除所有缓存."""
+
     async def _clear_cache() -> None:
         if cache._redis is None:
             await cache.connect()

@@ -17,11 +17,11 @@ TRANSLATIONS: Dict[str, gettext.NullTranslations] = {}
 
 def setup_i18n() -> None:
     """初始化国际化系统.
-    
+
     创建语言文件目录并加载所有支持的语言翻译。
     """
     os.makedirs(LOCALE_DIR, exist_ok=True)
-    
+
     for lang in settings.SUPPORTED_LANGUAGES:
         try:
             TRANSLATIONS[lang] = gettext.translation(

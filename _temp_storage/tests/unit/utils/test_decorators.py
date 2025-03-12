@@ -7,7 +7,7 @@ from src.utils.decorators import deprecated, retry, timing
 
 def test_retry_successful():
     """Test retry decorator with successful function."""
-    
+
     @retry(max_attempts=3, delay=0.1)
     def success_func():
         return "success"
@@ -33,7 +33,7 @@ def test_retry_with_failure():
 
 def test_retry_max_attempts():
     """Test retry decorator reaches max attempts."""
-    
+
     @retry(max_attempts=3, delay=0.1)
     def always_fail():
         raise ValueError("Always fails")
@@ -44,7 +44,7 @@ def test_retry_max_attempts():
 
 def test_timing_decorator():
     """Test timing decorator logs execution time."""
-    
+
     @timing
     def slow_function():
         return "done"
@@ -55,7 +55,7 @@ def test_timing_decorator():
 
 def test_deprecated_decorator():
     """Test deprecated decorator logs warning."""
-    
+
     @deprecated
     def old_function():
         return "old"

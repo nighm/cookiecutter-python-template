@@ -20,16 +20,14 @@ metrics_app = make_asgi_app()
 
 # 请求计数器
 request_count = metrics.counter(
-    "http_requests_total",
-    "Total HTTP requests count",
-    ["method", "endpoint", "status"]
+    "http_requests_total", "Total HTTP requests count", ["method", "endpoint", "status"]
 )
 
 # 请求延迟直方图
 request_latency = metrics.histogram(
     "http_request_duration_seconds",
     "HTTP request duration in seconds",
-    ["method", "endpoint"]
+    ["method", "endpoint"],
 )
 
 
@@ -51,7 +49,7 @@ class MetricsMiddleware(BaseHTTPMiddleware):
             request_count.labels(
                 method=request.method,
                 endpoint=request.url.path,
-                status=response.status_code
+                status=response.status_code,
             ).inc()
             return response
         except Exception as e:

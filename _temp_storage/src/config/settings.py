@@ -25,7 +25,9 @@ class Settings(BaseSettings):
 
     # Internationalization
     DEFAULT_LANGUAGE: str = Field(default="en", env="DEFAULT_LANGUAGE")
-    SUPPORTED_LANGUAGES: list[str] = Field(default=["en", "zh"], env="SUPPORTED_LANGUAGES")
+    SUPPORTED_LANGUAGES: list[str] = Field(
+        default=["en", "zh"], env="SUPPORTED_LANGUAGES"
+    )
 
     # API Configuration
     API_V1_PREFIX: str = "/api/v1"

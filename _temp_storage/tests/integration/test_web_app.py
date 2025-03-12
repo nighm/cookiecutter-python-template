@@ -47,12 +47,15 @@ def test_metrics_collection() -> None:
     # 发送请求以触发指标收集
     client.get("/")
     client.get("/health")
-    
+
     # 检查指标是否被收集
     response = client.get("/metrics")
     assert response.status_code == 200
     metrics_text = response.text
-    
+
     # 验证请求计数器
     assert 'http_requests_total{endpoint="/",method="GET",status="200"}' in metrics_text
-    assert 'http_requests_total{endpoint="/health",method="GET",status="200"}' in metrics_text
+    assert (
+        'http_requests_total{endpoint="/health",method="GET",status="200"}'
+        in metrics_text
+    )

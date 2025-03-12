@@ -28,7 +28,7 @@ class DataProcessor:
 
         Args:
             max_items: 最大处理项数，默认为100
-        
+
         Raises:
             ValueError: 如果max_items小于等于0
         """
@@ -38,9 +38,7 @@ class DataProcessor:
         self._processed_count = 0
 
     def process_data(
-        self, 
-        data: List[Union[int, float]], 
-        scale_factor: float = 1.0
+        self, data: List[Union[int, float]], scale_factor: float = 1.0
     ) -> List[float]:
         """处理数值数据列表。
 
@@ -56,7 +54,9 @@ class DataProcessor:
             TypeError: 如果输入包含非数值类型
         """
         if len(data) > self.max_items:
-            logger.error(f"Input data exceeds max items: {len(data)} > {self.max_items}")
+            logger.error(
+                f"Input data exceeds max items: {len(data)} > {self.max_items}"
+            )
             raise ValueError(f"Too many items: {len(data)} > {self.max_items}")
 
         try:
@@ -88,7 +88,7 @@ def test_data_processor():
     assert processor.process_data(input_data, scale_factor=2.0) == expected
 
     # 测试异常处理
-    with patch.object(logger, 'error') as mock_logger:
+    with patch.object(logger, "error") as mock_logger:
         try:
             processor.process_data([1, 2, 3, 4, 5, 6])
             assert False, "Should raise ValueError"
@@ -99,9 +99,9 @@ def test_data_processor():
     assert processor.processed_count == 3
 
     # 测试类型错误
-    with patch.object(logger, 'error') as mock_logger:
+    with patch.object(logger, "error") as mock_logger:
         try:
-            processor.process_data([1, '2', 3])
+            processor.process_data([1, "2", 3])
             assert False, "Should raise TypeError"
         except TypeError:
-            mock_logger.assert_called_once() 
+            mock_logger.assert_called_once()

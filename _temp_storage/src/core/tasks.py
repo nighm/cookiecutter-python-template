@@ -24,10 +24,7 @@ class TaskManager:
         self._scheduler.start()
 
     def background_task(
-        self,
-        name: Optional[str] = None,
-        max_retries: int = 3,
-        retry_delay: int = 5
+        self, name: Optional[str] = None, max_retries: int = 3, retry_delay: int = 5
     ) -> Callable:
         """后台任务装饰器.
 
@@ -39,6 +36,7 @@ class TaskManager:
         Returns:
             装饰器函数
         """
+
         def decorator(func: Callable) -> Callable:
             task_name = name or func.__name__
 
@@ -56,12 +54,12 @@ class TaskManager:
                         if retries > max_retries:
                             logger.error(
                                 f"Task {task_name} failed after {max_retries} retries",
-                                exc_info=e
+                                exc_info=e,
                             )
                             raise
                         logger.warning(
                             f"Task {task_name} failed, retrying in {retry_delay} seconds",
-                            exc_info=e
+                            exc_info=e,
                         )
                         await asyncio.sleep(retry_delay)
                     finally:
@@ -69,13 +67,11 @@ class TaskManager:
                             del self._tasks[task_name]
 
             return wrapper
+
         return decorator
 
     def schedule_task(
-        self,
-        cron: str,
-        name: Optional[str] = None,
-        max_instances: int = 1
+        self, cron: str, name: Optional[str] = None, max_instances: int = 1
     ) -> Callable:
         """定时任务装饰器.
 
@@ -87,6 +83,7 @@ class TaskManager:
         Returns:
             装饰器函数
         """
+
         def decorator(func: Callable) -> Callable:
             task_name = name or func.__name__
 
@@ -104,9 +101,10 @@ class TaskManager:
                 id=task_name,
                 name=task_name,
                 max_instances=max_instances,
-                replace_existing=True
+                replace_existing=True,
             )
             return wrapper
+
         return decorator
 
     def get_active_tasks(self) -> List[Dict[str, Any]]:
@@ -118,23 +116,30 @@ class TaskManager:
         tasks = []
         # 后台任务
         for name, task in self._tasks.items():
-            tasks.append({
-                "name": name,
-                "type": "background",
-                "status": "running" if not task.done() else "completed",
-                "created_at": task.get_coro().cr_frame.f_locals.get("start_time", "N/A")
-            })
-        
+            tasks.append(
+                {
+                    "name": name,
+                    "type": "background",
+                    "status": "running" if not task.done() else "completed",
+                    "created_at": task.get_coro().cr_frame.f_locals.get(
+                        "start_time", "N/A"
+                    ),
+                }
+            )
+
         # 定时任务
         for job in self._scheduler.get_jobs():
-            tasks.append({
-                "name": job.name,
-                "type": "scheduled",
-                "status": "scheduled",
-                "next_run": job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
-                if job.next_run_time else "N/A"
-            })
-        
+            tasks.append(
+                {
+                    "name": job.name,
+                    "type": "scheduled",
+                    "status": "scheduled",
+                    "next_run": job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
+                    if job.next_run_time
+                    else "N/A",
+                }
+            )
+
         return tasks
 
     async def cancel_task(self, name: str) -> bool:

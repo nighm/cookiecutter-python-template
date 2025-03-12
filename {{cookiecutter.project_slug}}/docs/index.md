@@ -1,6 +1,6 @@
 # Welcome to {{ cookiecutter.project_name }}
 
-{{ cookiecutter.description }}
+{{ cookiecutter.project_description }}
 
 ## Getting Started
 
@@ -64,4 +64,19 @@ poetry run pytest
 ├── tests/
 ├── docs/
 └── README.md
-``` 
+```
+
+# 项目文档
+
+## 配置指南
+- [代码质量配置](code_quality_config.md)
+- [代码质量示例](quality_examples.md)
+
+## 项目说明
+- [项目概述](../README.md)
+- [更新日志](../CHANGELOG.md)
+
+## 外部文档
+- [项目模板文档](../../docs/index.md)
+- [代码质量工具指南](../../docs/code_quality_tools.md)
+- [代码检查分级指南](../../docs/quality_levels.md) 

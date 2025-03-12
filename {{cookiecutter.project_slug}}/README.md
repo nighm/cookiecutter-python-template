@@ -1,55 +1,110 @@
 # {{ cookiecutter.project_name }}
 
-{{ cookiecutter.description }}
+{{ cookiecutter.project_description }}
 
-## Features
+## 功能特点
 
-- Modern Python development with Poetry
-- Code quality tools (Black, MyPy, isort)
-- Automated testing with pytest
-- Continuous Integration with GitHub Actions
-- Comprehensive documentation with MkDocs
+- 完整的代码质量检查工具链
+- 类型检查和文档字符串验证
+- 自动化测试和覆盖率报告
+- 性能分析和优化工具
+- 安全性检查
 
-## Installation
+## 快速开始
+
+1. 确保已安装 Python 3.8 或更高版本
+2. 安装 Poetry 包管理工具：
+   ```bash
+   curl -sSL https://install.python-poetry.org | python3 -
+   ```
+
+3. 安装项目依赖：
+   ```bash
+   poetry install
+   ```
+
+4. 运行测试：
+   ```bash
+   poetry run pytest
+   ```
+
+5. 运行代码质量检查：
+   ```bash
+   poetry run black .
+   poetry run isort .
+   poetry run ruff check .
+   poetry run mypy .
+   ```
+
+## 代码质量工具
+
+### 基础工具
+- **black**: 代码格式化
+- **isort**: 导入语句排序
+- **ruff**: 快速的 Python linter
+- **mypy**: 类型检查
+- **pydocstyle**: 文档字符串检查
+- **pytest**: 测试框架
+
+### 标准工具
+- **pytest-cov**: 测试覆盖率
+- **pylint**: 代码分析
+- **bandit**: 安全检查
+- **vulture**: 死代码检查
+
+### 高级工具
+- **safety**: 依赖安全检查
+- **xenon**: 代码复杂度检查
+- **radon**: 代码质量度量
+- **pytype**: 补充类型检查
+- **scalene**: 性能分析
+
+## 使用指南
+
+### 运行所有检查
 
 ```bash
-# Install Poetry
-curl -sSL https://install.python-poetry.org | python3 -
+# 运行所有基础检查
+poetry run black . && poetry run isort . && poetry run ruff check . && poetry run mypy .
 
-# Install dependencies
-poetry install
+# 运行测试和覆盖率报告
+poetry run pytest --cov
+
+# 运行安全检查
+poetry run bandit -r src
+poetry run safety check
+
+# 运行性能分析
+poetry run scalene src/main.py
 ```
 
-## Development
+### 配置文件
 
-```bash
-# Install pre-commit hooks
-poetry run pre-commit install
+- `pyproject.toml`: 主要配置文件，包含所有工具的设置
+- `.gitignore`: Git 忽略文件配置
+- `tests/`: 测试文件目录
+- `src/`: 源代码目录
 
-# Run tests
-poetry run pytest
+## 开发流程
 
-# Run type checks
-poetry run mypy .
+1. 创建新功能分支
+2. 编写代码和测试
+3. 运行代码质量检查
+4. 提交代码前确保所有检查通过
+5. 创建合并请求
 
-# Format code
-poetry run black .
-```
+## 贡献指南
 
-## Documentation
+1. Fork 本仓库
+2. 创建功能分支
+3. 提交更改
+4. 推送到分支
+5. 创建合并请求
 
-```bash
-# Build documentation
-poetry run mkdocs build
+## 许可证
 
-# Serve documentation locally
-poetry run mkdocs serve
-```
+本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
 
-## License
+## 作者
 
-{% if cookiecutter.open_source_license != "Not open source" %}
-This project is licensed under the {{ cookiecutter.open_source_license }} - see the [LICENSE](LICENSE) file for details.
-{% else %}
-This project is not open source and is intended for private use only.
-{% endif %} 
+{{ cookiecutter.full_name }} <{{ cookiecutter.email }}> 

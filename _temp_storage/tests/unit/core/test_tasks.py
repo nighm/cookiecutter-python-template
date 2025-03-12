@@ -63,6 +63,7 @@ async def test_schedule_task(task_manager: TaskManager) -> None:
 
 async def test_get_active_tasks(task_manager: TaskManager) -> None:
     """测试获取活动任务列表."""
+
     # 添加后台任务
     @task_manager.background_task(name="bg_task")
     async def bg_task() -> None:
@@ -89,6 +90,7 @@ async def test_get_active_tasks(task_manager: TaskManager) -> None:
 
 async def test_cancel_task(task_manager: TaskManager) -> None:
     """测试取消任务."""
+
     # 添加后台任务
     @task_manager.background_task(name="cancel_test")
     async def long_task() -> None:
@@ -110,12 +112,9 @@ def test_cron_trigger_validation(task_manager: TaskManager) -> None:
     """测试Cron表达式验证."""
     # 有效的Cron表达式
     trigger = CronTrigger.from_crontab("*/5 * * * *")
-    next_run = trigger.get_next_fire_time(
-        None,
-        datetime.now()
-    )
+    next_run = trigger.get_next_fire_time(None, datetime.now())
     assert next_run is not None
-    
+
     # 无效的Cron表达式
     with pytest.raises(ValueError):
         CronTrigger.from_crontab("invalid cron")

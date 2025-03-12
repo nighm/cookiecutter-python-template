@@ -1,6 +1,6 @@
 site_name: {{ cookiecutter.project_name }}
-site_description: {{ cookiecutter.description }}
-site_author: {{ cookiecutter.author }}
+site_description: {{ cookiecutter.project_description }}
+site_author: {{ cookiecutter.full_name }}
 
 theme:
   name: material

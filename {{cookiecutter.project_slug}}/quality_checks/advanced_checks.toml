@@ -1,0 +1,75 @@
+# 高级级别检查配置
+
+[black]
+enabled = true
+line-length = 88
+target-version = ["py38"]
+include = '\.pyi?$'
+
+[isort]
+enabled = true
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[ruff]
+enabled = true
+line-length = 88
+target-version = "py38"
+select = ["E", "F", "B", "I", "N", "D", "S", "C"]  # 启用所有规则
+
+[mypy]
+enabled = true
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+strict = true  # 启用所有严格检查
+
+[pytest]
+enabled = true
+addopts = "-v --cov=src --cov-report=term-missing --cov-fail-under=90"
+min_coverage = 90  # 要求90%的测试覆盖率
+
+[pylint]
+enabled = true
+max-line-length = 88
+disable = []  # 不禁用任何检查
+
+[bandit]
+enabled = true
+exclude_dirs = ["tests"]
+skips = []  # 不跳过任何安全检查
+level = "HIGH"
+
+[vulture]
+enabled = true
+min_confidence = 90
+paths = ["src"]
+exclude = ["tests/"]
+
+[safety]
+enabled = true
+ignore_vulnerabilities = []
+full_report = true
+
+[xenon]
+enabled = true
+max-absolute = "A"
+max-modules = "A"
+max-average = "A"
+
+[radon]
+enabled = true
+cc_min = "B"
+
+[pytype]
+enabled = true
+disable = []
+python_version = "3.8"
+
+[scalene]
+enabled = true
+cpu_sampling_rate = 0.1
+memory_sampling_rate = 0.1 

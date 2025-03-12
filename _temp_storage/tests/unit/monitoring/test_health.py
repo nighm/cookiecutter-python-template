@@ -27,7 +27,7 @@ def test_check_health(health_check: HealthCheck) -> None:
     """测试基础健康检查."""
     health_check.add_check("test_check")
     status = health_check.check_health()
-    
+
     assert isinstance(status, HealthStatus)
     assert status.status == "healthy"
     assert status.version == "0.1.0"
@@ -37,7 +37,7 @@ def test_check_health(health_check: HealthCheck) -> None:
 def test_check_liveness(health_check: HealthCheck) -> None:
     """测试存活检查."""
     status = health_check.check_liveness()
-    
+
     assert isinstance(status, HealthStatus)
     assert status.status == "alive"
     assert status.version == "0.1.0"
@@ -47,15 +47,11 @@ def test_check_liveness(health_check: HealthCheck) -> None:
 def test_check_readiness(health_check: HealthCheck) -> None:
     """测试就绪检查."""
     status = health_check.check_readiness()
-    
+
     assert isinstance(status, HealthStatus)
     assert status.status == "ready"
     assert status.version == "0.1.0"
-    assert status.checks == {
-        "database": True,
-        "cache": True,
-        "storage": True
-    }
+    assert status.checks == {"database": True, "cache": True, "storage": True}
 
 
 def test_health_status_model() -> None:
@@ -64,9 +60,9 @@ def test_health_status_model() -> None:
         status="healthy",
         version="0.1.0",
         checks={"test": True},
-        details={"message": "All systems operational"}
+        details={"message": "All systems operational"},
     )
-    
+
     assert status.status == "healthy"
     assert status.version == "0.1.0"
     assert status.checks == {"test": True}

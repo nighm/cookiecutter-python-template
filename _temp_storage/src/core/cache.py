@@ -53,12 +53,7 @@ class CacheManager:
             await self.connect()
         return await self._redis.get(key)  # type: ignore
 
-    async def set(
-        self,
-        key: str,
-        value: Any,
-        expire: Optional[int] = None
-    ) -> None:
+    async def set(self, key: str, value: Any, expire: Optional[int] = None) -> None:
         """设置缓存值.
 
         Args:

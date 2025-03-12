@@ -42,11 +42,7 @@ class HealthCheck:
             健康状态信息
         """
         checks = {check: True for check in self._checks}
-        return HealthStatus(
-            status="healthy",
-            version=self._version,
-            checks=checks
-        )
+        return HealthStatus(status="healthy", version=self._version, checks=checks)
 
     def check_liveness(self) -> HealthStatus:
         """Kubernetes存活检查.
@@ -55,9 +51,7 @@ class HealthCheck:
             存活状态信息
         """
         return HealthStatus(
-            status="alive",
-            version=self._version,
-            checks={"process": True}
+            status="alive", version=self._version, checks={"process": True}
         )
 
     async def check_readiness(self) -> HealthStatus:
@@ -73,7 +67,7 @@ class HealthCheck:
         checks = {
             "database": db_status,
             "cache": cache_status,
-            "storage": storage_status
+            "storage": storage_status,
         }
 
         details = {}
@@ -85,12 +79,12 @@ class HealthCheck:
             details["storage"] = "存储服务不可用"
 
         status = "ready" if all(checks.values()) else "not_ready"
-        
+
         return HealthStatus(
             status=status,
             version=self._version,
             checks=checks,
-            details=details if details else None
+            details=details if details else None,
         )
 
     async def _check_storage(self) -> bool:

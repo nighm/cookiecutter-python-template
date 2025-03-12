@@ -1,7 +1,7 @@
 {% if cookiecutter.use_pre_commit == 'y' %}
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -10,21 +10,67 @@ repos:
 
 {% if cookiecutter.use_black == 'y' %}
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 24.2.0
     hooks:
       - id: black
 {% endif %}
 
   - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
+    rev: 5.13.2
     hooks:
       - id: isort
 
 {% if cookiecutter.use_mypy == 'y' %}
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.3.0
+    rev: v1.8.0
     hooks:
       - id: mypy
         additional_dependencies: [types-all]
+{% endif %}
+
+{% if cookiecutter.quality_level == "standard" or cookiecutter.quality_level == "advanced" %}
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.7
+    hooks:
+      - id: bandit
+        args: ["-c", "pyproject.toml"]
+
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: v2.10
+    hooks:
+      - id: vulture
+        args: ["src"]
+{% endif %}
+
+{% if cookiecutter.quality_level == "advanced" %}
+  - repo: https://github.com/pyupio/safety
+    rev: 2.3.5
+    hooks:
+      - id: safety
+        args: ["check"]
+
+  - repo: local
+    hooks:
+      - id: xenon
+        name: xenon
+        entry: xenon --max-absolute A
+        language: python
+        types: [python]
+        additional_dependencies: [xenon]
+
+      - id: radon
+        name: radon
+        entry: radon cc
+        language: python
+        types: [python]
+        additional_dependencies: [radon]
+{% endif %}
+
+{% if cookiecutter.use_ruff == 'y' %}
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.0
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
 {% endif %}
 {% endif %} 

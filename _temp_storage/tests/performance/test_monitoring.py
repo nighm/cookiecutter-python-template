@@ -32,7 +32,7 @@ def test_health_check_performance() -> None:
     times = []
     for _ in range(100):
         times.append(measure_time(health.check_health))
-    
+
     # 计算平均执行时间
     avg_time = sum(times) / len(times)
     assert avg_time < 0.001  # 确保每次检查小于1ms
@@ -41,11 +41,8 @@ def test_health_check_performance() -> None:
 def test_metrics_performance() -> None:
     """测试指标性能."""
     counter = metrics.counter("perf_test_counter", "Performance test counter")
-    histogram = metrics.histogram(
-        "perf_test_histogram",
-        "Performance test histogram"
-    )
-    
+    histogram = metrics.histogram("perf_test_histogram", "Performance test histogram")
+
     # 执行1000次指标记录
     times = []
     for _ in range(1000):
@@ -53,7 +50,7 @@ def test_metrics_performance() -> None:
         counter.inc()
         histogram.observe(0.1)
         times.append(time.time() - start_time)
-    
+
     # 计算平均执行时间
     avg_time = sum(times) / len(times)
     assert avg_time < 0.0001  # 确保每次记录小于0.1ms
@@ -61,6 +58,7 @@ def test_metrics_performance() -> None:
 
 def test_concurrent_health_checks() -> None:
     """测试并发健康检查."""
+
     def check_health() -> None:
         response = client.get("/health")
         assert response.status_code == 200
@@ -70,7 +68,7 @@ def test_concurrent_health_checks() -> None:
         start_time = time.time()
         list(executor.map(lambda _: check_health(), range(100)))
         total_time = time.time() - start_time
-    
+
     # 确保总执行时间在合理范围内
     assert total_time < 2  # 所有请求应在2秒内完成
 
@@ -81,12 +79,12 @@ def test_metrics_endpoint_performance() -> None:
     for _ in range(100):
         client.get("/")
         client.get("/health")
-    
+
     # 测量指标端点响应时间
     times = []
     for _ in range(10):
         times.append(measure_time(lambda: client.get("/metrics")))
-    
+
     # 计算平均响应时间
     avg_time = sum(times) / len(times)
     assert avg_time < 0.1  # 确保指标收集小于100ms

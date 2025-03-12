@@ -45,7 +45,7 @@ def retry(
                     last_exception = e
                     if attempt == max_attempts - 1:
                         raise
-                    
+
                     logger.warning(
                         "函数调用失败",
                         function=func.__name__,
@@ -53,7 +53,7 @@ def retry(
                         max_attempts=max_attempts,
                         error=str(e),
                     )
-                    
+
                     time.sleep(current_delay)
                     current_delay *= backoff_factor
 

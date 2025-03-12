@@ -27,11 +27,11 @@ async def test_cache_operations(cache_manager: CacheManager) -> None:
     """测试缓存操作."""
     # 设置缓存
     await cache_manager.set("test_key", "test_value")
-    
+
     # 获取缓存
     value = await cache_manager.get("test_key")
     assert value == "test_value"
-    
+
     # 删除缓存
     await cache_manager.delete("test_key")
     value = await cache_manager.get("test_key")
@@ -42,15 +42,16 @@ async def test_cache_expiration(cache_manager: CacheManager) -> None:
     """测试缓存过期."""
     # 设置带过期时间的缓存
     await cache_manager.set("test_key", "test_value", expire=1)
-    
+
     # 立即获取
     value = await cache_manager.get("test_key")
     assert value == "test_value"
-    
+
     # 等待过期
     import asyncio
+
     await asyncio.sleep(1.1)
-    
+
     # 过期后获取
     value = await cache_manager.get("test_key")
     assert value is None

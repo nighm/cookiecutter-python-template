@@ -11,30 +11,31 @@ Example:
     ```
 """
 
+
 class Calculator:
     """一个简单的计算器类.
-    
+
     这个类提供基本的数学运算功能，包括加法、减法等。
     每个方法都有详细的文档说明。
-    
+
     Attributes:
         history (list): 保存计算历史记录
     """
-    
+
     def __init__(self):
         """初始化计算器实例."""
         self.history = []
-    
+
     def add(self, a: float, b: float) -> float:
         """执行加法运算.
-        
+
         Args:
             a (float): 第一个数
             b (float): 第二个数
-            
+
         Returns:
             float: 两个数的和
-            
+
         Example:
             ```python
             calc = Calculator()
@@ -44,17 +45,17 @@ class Calculator:
         result = a + b
         self.history.append(f"{a} + {b} = {result}")
         return result
-    
+
     def subtract(self, a: float, b: float) -> float:
         """执行减法运算.
-        
+
         Args:
             a (float): 被减数
             b (float): 减数
-            
+
         Returns:
             float: 两个数的差
-            
+
         Example:
             ```python
             calc = Calculator()
@@ -64,11 +65,11 @@ class Calculator:
         result = a - b
         self.history.append(f"{a} - {b} = {result}")
         return result
-    
+
     def get_history(self) -> list:
         """获取计算历史记录.
-        
+
         Returns:
             list: 包含所有计算历史的列表
         """
-        return self.history 
+        return self.history
