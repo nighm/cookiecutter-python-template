@@ -71,6 +71,8 @@ check_untyped_defs = true  # 检查未类型化的定义
 [tool.pytest.ini_options]
 testpaths = ["tests"]  # 测试文件路径
 python_files = ["test_*.py"]  # 测试文件模式
+python_classes = ["Test*"]  # 测试类模式
+python_functions = ["test_*"]  # 测试函数模式
 addopts = "-v --cov=src --cov-report=html"  # 测试选项
 asyncio_mode = "auto"  # 异步模式配置
 
