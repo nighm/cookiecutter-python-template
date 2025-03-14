@@ -69,12 +69,12 @@ class DataProcessor:
             item: 要处理的项目
 
         Returns:
-            处理后的项目
+            处理后的项目，包含processed_value和name字段
         """
-        # 使用列表推导式优化字符串连接
-        result = "".join([str(item["value"]) for _ in range(1000)])
-
-        return {"processed_value": result}
+        return {
+            "processed_value": f"Processed: {item['value']}",
+            "name": item["name"]
+        }
 
     def save_results(self, results: List[Dict[str, Any]], filename: str) -> None:
         """保存处理结果到文件。
