@@ -1,111 +1,86 @@
-# Python Project Template
 # Python项目模板
 
-一个具有企业级特性的完整Python项目模板。
+一个注重代码质量和开发效率的现代化Python项目模板。
 
 ## ✨ 特性
 
-* 🐍 支持 Python 3.11+ (推荐 3.11.8)
-* 📦 使用 Poetry 进行依赖管理
-* 🚀 完整的代码质量检查工具链
-  - Black (^24.2.0) - 代码格式化
-  - Ruff (^0.3.0) - 快速代码分析
-  - MyPy (^1.8.0) - 类型检查
-  - Bandit (^1.7.7) - 安全检查
-  - isort (^5.13.2) - 导入排序
-* 📊 测试与覆盖率
-  - pytest (^8.0.1)
-  - pytest-cov (^4.1.0)
-  - pytest-asyncio (^0.23.5)
-* 📚 文档工具
-  - Sphinx (^7.2.6)
-  - sphinx-rtd-theme (^2.0.0)
-* 🔄 Git 工作流集成
-  - pre-commit (^3.6.2)
-  - GitHub Actions CI/CD
-* 🛠️ 核心依赖
-  - pydantic (^2.6.3)
-  - python-dotenv (^1.0.1)
-  - structlog (^24.1.0)
-  - sqlalchemy (^2.0.27)
+- 📦 使用Poetry进行依赖管理和打包
+- 🔍 集成全面的代码质量检查工具链
+- 📝 自动API文档生成和项目文档
+- 🚀 GitHub Actions持续集成/持续部署
+- 🧪 完整的测试框架和覆盖率报告
+- 🔒 安全检查和依赖审计
+- 🐳 Docker支持（可选）
 
 ## 🚀 快速开始
 
-### 前置要求
+### 环境要求
 
-* Python 3.11+ (推荐 3.11.8)
-* Poetry
-* Git
+- Python 3.11+ 
+- Poetry
+- Git
 
-### 创建新项目
+### 创建项目
 
 ```bash
-# 安装 cookiecutter
+# 安装cookiecutter
 pip install cookiecutter
 
-# 从模板创建项目
-cookiecutter https://github.com/nighm/cookiecutter-python-template.git
+# 创建项目
+cookiecutter https://github.com/your-username/cookiecutter-python-template.git
+
+# 初始化
+cd your-project-name
+poetry install
+poetry shell
+pre-commit install
 ```
 
-### 项目设置
+## 📚 文档
+
+- [快速入门指南](docs/quick_start.md) - 详细的项目创建和初始化步骤
+- [项目详细说明](docs/project_details.md) - 项目结构和配置说明
+- [开发指南](docs/development_guide.md) - 开发流程和最佳实践
+- [代码质量](docs/code_quality.md) - 代码质量工具和规范
+
+## 🛠️ 主要命令
 
 ```bash
-# 安装依赖
-poetry install
+# 开发
+poetry install        # 安装依赖
+poetry shell         # 激活环境
+pytest               # 运行测试
+pytest --cov=src     # 测试覆盖率报告
 
-# 设置 pre-commit 钩子
-poetry run pre-commit install
+# 代码质量
+python scripts/run_quality_checks.py  # 运行所有质量检查
+black .              # 格式化代码
+isort .             # 整理导入
 
-# 运行测试
-poetry run pytest
+# 文档
+mkdocs serve        # 本地预览文档
+mkdocs build        # 构建文档
 ```
 
-## 📁 项目结构
+## 📂 项目结构
 
 ```
-├── src/                    # 源代码目录
+your-project-name/
+├── src/                    # 源代码
 ├── tests/                  # 测试文件
-│   ├── quality_examples/   # 质量检查示例
-│   └── ...
 ├── docs/                   # 文档
 ├── scripts/                # 工具脚本
-├── config/                 # 配置文件
-│   └── quality/           # 质量检查配置
-├── .github/               # GitHub Actions 配置
-├── pyproject.toml        # Poetry 项目配置
-└── README.md            # 项目说明
+└── [配置文件]
 ```
 
-## 🔍 代码质量检查
+## 🤝 贡献
 
-项目支持三个级别的代码质量检查：
-
-* basic - 基础检查（格式化、类型检查）
-* standard - 标准检查（包含安全检查、复杂度分析）
-* advanced - 高级检查（包含更严格的规则和额外的检查）
-
-运行检查：
-
-```bash
-poetry run python scripts/run_quality_checks.py --level [basic|standard|advanced]
-```
-
-## 📖 文档
-
-* [快速入门指南](./docs/quick_start.md)
-* [代码质量配置指南](./docs/code_quality_config.md)
-* [质量检查示例](./docs/quality_examples.md)
+欢迎贡献！请查看[贡献指南](CONTRIBUTING.md)了解详情。
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](./LICENSE) 文件
+本项目采用MIT许可证 - 查看[LICENSE](LICENSE)文件了解详情。
 
-## 👥 作者
+## 📋 更新日志
 
-* humingming (nighm@sina.com)
-
-## 🙏 致谢
-
-* 感谢所有贡献者
-* 借鉴了现代 Python 最佳实践
-* 使用了最新的开发工具和标准
+查看[CHANGELOG.md](CHANGELOG.md)了解版本更新历史。

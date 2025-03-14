@@ -1,173 +1,263 @@
-# Python项目模板详细说明
+# 项目详细说明
 
-## 一、模板概述
+## 项目结构说明
 
-### 1.1 设计理念
-- 通用性：适用于各种规模和类型的Python项目
-- 可扩展性：支持从小型到超大型项目的扩展
-- 标准化：遵循Python社区最佳实践
-- 现代化：使用最新的工具和技术栈
-
-### 1.2 适用范围
-- **项目规模**：小型项目 → 超大型项目
-- **项目类型**：
-  - Web后端服务
-  - 命令行工具
-  - 数据处理应用
-  - API服务
-  - 桌面应用
-  - 机器学习项目
-  - 自动化脚本
-
-## 二、目录结构详解
-
-### 2.1 根目录结构
+### 目录结构
 ```
-cookiecutter-python-template/
-├── .github/                    # GitHub相关配置
-├── hooks/                      # Cookiecutter钩子脚本
-├── {{cookiecutter.project_slug}}/  # 项目模板主目录
-├── cookiecutter.json          # 模板配置文件
-├── pyproject.toml             # 项目依赖配置
-└── README.md                  # 项目说明文档
-```
-
-### 2.2 生成项目结构
-```
-your_project/
-├── src/                      # 源代码目录
-│   └── your_package/
-│       ├── __init__.py
-│       ├── core/            # 核心功能
-│       ├── utils/           # 工具函数
-│       └── api/             # API接口
-│
-├── tests/                   # 测试目录
-│   ├── unit/               # 单元测试
-│   ├── integration/        # 集成测试
-│   └── performance/        # 性能测试
-│
-├── docs/                   # 文档目录
-│   ├── zh/                # 中文文档
-│   └── en/                # 英文文档
-│
-├── docker/                # Docker配置
-│   ├── Dockerfile
-│   └── docker-compose.yml
-│
-└── [配置文件]
-    ├── pyproject.toml    # 项目配置
-    ├── .env.example      # 环境变量示例
-    └── README.md        # 项目说明
+project_root/
+├── src/                    # 源代码目录
+│   └── your_package/       # 主包目录
+│       ├── __init__.py    # 包初始化文件
+│       ├── core/          # 核心功能模块
+│       ├── utils/         # 工具函数
+│       └── cli/           # 命令行接口
+├── tests/                 # 测试目录
+│   ├── __init__.py
+│   ├── conftest.py       # pytest配置和通用fixture
+│   └── test_*.py         # 测试文件
+├── docs/                  # 文档目录
+│   ├── index.md          # 文档首页
+│   └── *.md              # 其他文档
+├── scripts/              # 工具脚本
+│   └── run_quality_checks.py  # 代码质量检查脚本
+├── .github/              # GitHub配置
+│   └── workflows/        # GitHub Actions工作流
+├── config/              # 配置文件目录
+│   └── quality/         # 代码质量工具配置
+├── .env.example         # 环境变量示例
+├── .gitignore          # Git忽略配置
+├── .pre-commit-config.yaml  # pre-commit配置
+├── CHANGELOG.md        # 更新日志
+├── CONTRIBUTING.md     # 贡献指南
+├── LICENSE            # 许可证
+├── Makefile          # 常用命令
+├── README.md         # 项目说明
+├── mkdocs.yml        # 文档配置
+├── poetry.lock       # 依赖版本锁定
+├── poetry.toml       # Poetry配置
+└── pyproject.toml    # 项目配置
 ```
 
-## 三、配置文件详解
+### 关键文件说明
 
-### 3.1 cookiecutter.json
-```json
-{
-    "project_name": "Python Project",
-    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-    "author": "Your Name",
-    "email": "your.email@example.com",
-    "description": "Project description",
-    "python_version": ["3.8", "3.9", "3.10", "3.11"],
-    "use_pytest": "y",
-    "use_black": "y",
-    "use_docker": "y"
-}
-```
+#### 1. pyproject.toml
+项目的核心配置文件，包含：
+- 项目元数据
+- 依赖管理
+- 构建系统配置
+- 工具配置（black, mypy等）
 
-### 3.2 pyproject.toml
 ```toml
 [tool.poetry]
-name = "{{ cookiecutter.project_slug }}"
+name = "your_package"
 version = "0.1.0"
-description = "{{ cookiecutter.description }}"
-authors = ["{{ cookiecutter.author }}"]
+description = "项目描述"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{include = "your_package", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^{{ cookiecutter.python_version }}"
+python = ">=3.11.0,<3.12.0"
+# 其他依赖...
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.0"
-black = "^23.0"
+# 开发依赖...
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# 工具配置...
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
 ```
 
-## 四、功能模块说明
+#### 2. .pre-commit-config.yaml
+Git提交钩子配置，用于自动运行代码质量检查：
+```yaml
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
 
-### 4.1 核心模块 (core/)
-- 业务逻辑实现
-- 数据模型定义
-- 核心功能实现
+-   repo: https://github.com/psf/black
+    rev: 24.0.0
+    hooks:
+    -   id: black
 
-### 4.2 工具模块 (utils/)
-- 通用工具函数
-- 辅助功能
-- 共享组件
+# 其他钩子...
+```
 
-### 4.3 API模块 (api/)
-- API路由定义
-- 请求处理
-- 响应格式化
+#### 3. mkdocs.yml
+文档配置文件：
+```yaml
+site_name: 项目名称
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
 
-## 五、测试架构
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+```
 
-### 5.1 测试类型
-1. **单元测试** (unit/)
-   - 测试单个功能
-   - 独立运行
-   - 快速反馈
+## 开发工具链
 
-2. **集成测试** (integration/)
-   - 测试模块交互
-   - 测试外部依赖
-   - 端到端测试
+### 1. 依赖管理 (Poetry)
+- 虚拟环境管理
+- 依赖解析和锁定
+- 包发布工具
 
-3. **性能测试** (performance/)
-   - 负载测试
-   - 压力测试
-   - 性能基准
+常用命令：
+```bash
+# 添加依赖
+poetry add package_name
+poetry add -D package_name  # 开发依赖
 
-## 六、文档结构
+# 更新依赖
+poetry update
 
-### 6.1 技术文档
-- API文档
-- 架构说明
-- 部署指南
+# 构建和发布
+poetry build
+poetry publish
+```
 
-### 6.2 用户文档
-- 使用教程
-- 示例代码
-- 常见问题
+### 2. 代码质量工具
+- 格式化：black, isort
+- 静态检查：mypy, ruff
+- 测试：pytest
+- 覆盖率：pytest-cov
+- 安全：bandit, safety
 
-## 七、部署相关
+### 3. 文档工具 (MkDocs)
+- Material主题
+- Python API文档生成
+- 自动部署到GitHub Pages
 
-### 7.1 Docker支持
-- 开发环境容器化
-- 生产环境部署
-- 多容器编排
+### 4. CI/CD (GitHub Actions)
+- 自动测试
+- 代码质量检查
+- 文档部署
+- 包发布
 
-### 7.2 CI/CD配置
-- 自动化测试
-- 自动化部署
-- 文档生成
+## 配置说明
 
-## 八、最佳实践
+### 1. 环境变量
+项目使用 `.env` 文件管理环境变量：
+```bash
+# .env.example
+DEBUG=false
+LOG_LEVEL=INFO
+API_KEY=your_api_key
+```
 
-### 8.1 开发流程
-1. 功能开发
-2. 测试编写
-3. 文档更新
-4. 代码审查
-5. 持续集成
+### 2. 日志配置
+```python
+# src/your_package/utils/logging.py
+import logging
 
-### 8.2 版本控制
-1. 分支管理
-2. 提交规范
-3. 版本发布
+def setup_logging(level: str = "INFO") -> None:
+    logging.basicConfig(
+        level=level,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+```
 
-### 8.3 代码质量
-1. 代码风格
-2. 测试覆盖
-3. 性能优化 
+### 3. 测试配置
+```python
+# tests/conftest.py
+import pytest
+from pathlib import Path
+
+@pytest.fixture
+def test_data_dir() -> Path:
+    return Path(__file__).parent / "data"
+```
+
+## 开发流程
+
+### 1. 功能开发
+1. 创建功能分支
+2. 编写代码和测试
+3. 运行代码质量检查
+4. 提交PR
+
+### 2. 测试流程
+1. 单元测试（pytest）
+2. 集成测试
+3. 代码覆盖率检查
+4. 性能测试（可选）
+
+### 3. 发布流程
+1. 更新版本号
+2. 更新CHANGELOG
+3. 创建发布分支
+4. 运行完整测试
+5. 构建和发布
+
+## 最佳实践
+
+### 1. 代码组织
+- 使用清晰的模块结构
+- 保持函数和类的单一职责
+- 使用类型注解
+- 编写清晰的文档字符串
+
+### 2. 测试实践
+- 编写有意义的测试用例
+- 使用fixture复用测试代码
+- 模拟外部依赖
+- 保持测试简单明了
+
+### 3. 文档实践
+- 及时更新文档
+- 包含代码示例
+- 说明配置选项
+- 提供故障排除指南
+
+### 4. 版本控制
+- 使用语义化版本
+- 编写清晰的提交信息
+- 及时合并上游更改
+- 定期清理分支
+
+## 常见问题
+
+### 1. 环境问题
+Q: 虚拟环境不生效？
+A: 确保已运行 `poetry shell` 或使用 `poetry run`
+
+### 2. 依赖问题
+Q: 依赖冲突如何解决？
+A: 检查 `poetry.lock`，使用 `poetry show --tree` 分析依赖树
+
+### 3. 测试问题
+Q: 测试覆盖率不足？
+A: 使用 `pytest --cov-report=html` 生成详细报告分析
+
+### 4. 工具问题
+Q: pre-commit检查失败？
+A: 运行 `pre-commit run --all-files` 手动检查所有文件
+
+## 扩展阅读
+
+- [Poetry文档](https://python-poetry.org/docs/)
+- [MkDocs文档](https://www.mkdocs.org/)
+- [pytest文档](https://docs.pytest.org/)
+- [GitHub Actions文档](https://docs.github.com/actions) 

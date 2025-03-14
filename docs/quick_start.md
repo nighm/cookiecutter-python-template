@@ -1,124 +1,205 @@
-# Python项目模板快速入门指南
+# 快速入门指南
 
-## 一、简介
+## 1. 环境准备
 
-这是一个现代化的 Python 项目模板，专注于代码质量和开发效率。模板使用 Poetry 进行依赖管理，支持 Python 3.11+ 版本，并集成了全面的代码质量检查工具。
-
-## 二、快速开始
-
-### 2.1 环境准备
+### 1.1 Python环境
+确保你的系统已安装Python 3.11或更高版本：
 ```bash
-# 1. 确保 Python 版本正确（推荐 3.11.8）
-python --version
+python --version  # 应该显示 3.11.x
+```
 
-# 2. 安装必要工具
-pip install cookiecutter poetry
+### 1.2 安装必要工具
+```bash
+# 安装 poetry（包管理工具）
+curl -sSL https://install.python-poetry.org | python3 -
 
-# 3. 创建新项目
-cookiecutter https://github.com/nighm/cookiecutter-python-template
+# 安装 cookiecutter（项目模板工具）
+pip install cookiecutter
 
-# 4. 安装项目依赖
-cd 你的项目名称
+# 验证安装
+poetry --version
+cookiecutter --version
+```
+
+## 2. 创建新项目
+
+### 2.1 使用模板创建项目
+```bash
+cookiecutter https://github.com/your-username/cookiecutter-python-template.git
+```
+
+### 2.2 填写项目信息
+在交互式提示中填写以下信息：
+- `project_name`: 项目名称（例如：My Amazing Project）
+- `project_slug`: 项目标识符（例如：my_amazing_project）
+- `project_description`: 项目描述
+- `author_name`: 你的名字
+- `author_email`: 你的邮箱
+
+### 2.3 初始化项目
+```bash
+# 进入项目目录
+cd my_amazing_project
+
+# 初始化 git 仓库
+git init
+
+# 安装依赖
 poetry install
 
-# 5. 设置 pre-commit 钩子
-poetry run pre-commit install
+# 激活虚拟环境
+poetry shell
+
+# 安装 pre-commit hooks
+pre-commit install
 ```
 
-### 2.2 项目结构
+## 3. 项目开发
+
+### 3.1 项目结构
 ```
-你的项目/
-├── src/                    # 源代码目录
-├── tests/                  # 测试文件
-│   ├── quality_examples/   # 质量检查示例
-│   └── ...
-├── docs/                   # 文档
-├── scripts/                # 工具脚本
-├── config/                 # 配置文件
-│   └── quality/           # 质量检查配置
-└── .github/               # GitHub Actions 配置
+my_amazing_project/
+├── src/
+│   └── my_amazing_project/
+│       ├── __init__.py
+│       └── core/
+├── tests/
+│   ├── __init__.py
+│   └── test_*.py
+├── docs/
+│   └── *.md
+└── scripts/
+    └── run_quality_checks.py
 ```
 
-## 三、基本使用
+### 3.2 开发流程
+1. 在 `src/my_amazing_project/` 下创建你的代码
+2. 在 `tests/` 下编写对应的测试
+3. 运行测试和代码质量检查：
+   ```bash
+   # 运行测试
+   pytest
+   
+   # 运行代码质量检查
+   python scripts/run_quality_checks.py
+   ```
 
-### 3.1 开发流程
-1. 激活环境：`poetry shell`
-2. 编写代码：在 `src/` 目录下开发
-3. 运行测试：`poetry run pytest`
-4. 运行代码质量检查：`poetry run python scripts/run_quality_checks.py --level basic`
+### 3.3 文档编写
+1. 在 `docs/` 目录下编写文档
+2. 本地预览文档：
+   ```bash
+   mkdocs serve
+   ```
+3. 构建文档：
+   ```bash
+   mkdocs build
+   ```
 
-### 3.2 常用命令
+## 4. 代码质量保证
+
+### 4.1 自动格式化
 ```bash
-# 运行测试（带覆盖率报告）
-poetry run pytest
-
-# 代码质量检查
-poetry run python scripts/run_quality_checks.py --level [basic|standard|advanced]
-
 # 格式化代码
-poetry run black .
-poetry run isort .
+black .
 
-# 类型检查
-poetry run mypy src
-
-# 代码分析
-poetry run ruff check .
+# 排序导入
+isort .
 ```
 
-## 四、文件说明
-
-### 4.1 重要文件
-- `pyproject.toml`: 项目配置和依赖管理
-- `poetry.lock`: 依赖版本锁定
-- `.pre-commit-config.yaml`: Git 提交钩子配置
-- `.env`: 环境变量（从 .env.example 复制）
-
-### 4.2 配置文件
-- `config/quality/basic/`: 基础级别质量检查配置
-- `config/quality/standard/`: 标准级别质量检查配置
-- `config/quality/advanced/`: 高级级别质量检查配置
-
-## 五、代码质量工具
-
-### 5.1 已集成的工具
-- Black (^24.2.0): 代码格式化
-- Ruff (^0.3.0): 快速代码分析
-- MyPy (^1.8.0): 类型检查
-- Bandit (^1.7.7): 安全检查
-- isort (^5.13.2): 导入排序
-
-### 5.2 运行质量检查
+### 4.2 代码检查
 ```bash
-# 基础检查（推荐日常使用）
-poetry run python scripts/run_quality_checks.py --level basic
+# 运行类型检查
+mypy src tests
 
-# 完整检查（推荐提交前运行）
-poetry run python scripts/run_quality_checks.py --level standard
+# 运行代码分析
+ruff check .
+
+# 运行安全检查
+bandit -r src
 ```
 
-## 六、常见问题
-
-### 6.1 "如何添加新依赖？"
+### 4.3 测试覆盖率
 ```bash
-# 添加主依赖
-poetry add 包名
+pytest --cov=src --cov-report=html
+```
+
+## 5. 依赖管理
+
+### 5.1 添加依赖
+```bash
+# 添加生产依赖
+poetry add package_name
 
 # 添加开发依赖
-poetry add --dev 包名
+poetry add -D package_name
 ```
 
-### 6.2 "如何更新依赖？"
+### 5.2 更新依赖
 ```bash
 # 更新所有依赖
 poetry update
 
 # 更新特定依赖
-poetry update 包名
+poetry update package_name
 ```
 
-## 七、下一步
+## 6. 版本发布
 
-- 查看 [代码质量配置指南](./code_quality_config.md) 了解更多配置选项
-- 查看 [质量检查示例](./quality_examples.md) 了解各级别检查的区别
-- 参考 `tests/quality_examples/` 目录下的示例代码 
+### 6.1 版本管理
+```bash
+# 更新版本号
+poetry version patch  # 或 minor 或 major
+
+# 构建项目
+poetry build
+```
+
+### 6.2 发布检查清单
+1. 更新 CHANGELOG.md
+2. 运行完整的测试套件
+3. 运行所有代码质量检查
+4. 更新文档
+5. 创建发布标签
+
+## 7. 常见问题
+
+### Q: 如何运行特定的测试？
+```bash
+pytest tests/test_specific.py -v
+pytest -k "test_name"
+```
+
+### Q: 如何查看代码覆盖率报告？
+```bash
+# 生成覆盖率报告
+pytest --cov=src --cov-report=html
+# 打开 htmlcov/index.html 查看报告
+```
+
+### Q: 如何处理依赖冲突？
+1. 查看详细依赖树：
+   ```bash
+   poetry show --tree
+   ```
+2. 更新特定包：
+   ```bash
+   poetry update package_name
+   ```
+3. 手动编辑 `pyproject.toml` 调整版本约束
+
+### Q: pre-commit hooks 太慢怎么办？
+1. 只对修改的文件运行检查：
+   ```bash
+   git add .
+   pre-commit run --files $(git diff --cached --name-only)
+   ```
+2. 使用缓存：
+   ```bash
+   pre-commit run --all-files  # 首次运行会建立缓存
+   ```
+
+## 8. 下一步
+
+- 阅读[代码质量工具指南](code_quality_tools.md)了解更多细节
+- 查看[项目配置指南](project_details.md)了解更多配置选项
+- 参考[示例代码](quality_examples.md)学习最佳实践 

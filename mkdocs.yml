@@ -1,0 +1,91 @@
+site_name: Python项目模板
+site_description: 一个注重代码质量和开发效率的现代化Python项目模板
+repo_url: https://github.com/username/project-name
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.share
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到暗色模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到亮色模式
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          setup_commands:
+            - import sys
+            - sys.path.append("src")
+          selection:
+            docstring_style: google
+          rendering:
+            show_source: true
+            show_root_heading: true
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - 首页: index.md
+  - 快速开始:
+    - 环境准备: quick_start/environment.md
+    - 创建项目: quick_start/create_project.md
+    - 项目结构: quick_start/project_structure.md
+  - 开发指南:
+    - 开发流程: development_guide.md
+    - 代码质量: code_quality.md
+    - 测试指南: testing_guide.md
+    - 文档编写: documentation_guide.md
+  - 使用示例:
+    - 基础示例: examples/basic_usage.md
+    - 高级示例: examples/advanced_usage.md
+  - API文档:
+    - 核心模块: api/core.md
+    - 工具模块: api/utils.md
+    - 数据模型: api/models.md
+  - 最佳实践:
+    - 代码组织: best_practices/code_organization.md
+    - 错误处理: best_practices/error_handling.md
+    - 性能优化: best_practices/performance.md
+    - 安全实践: best_practices/security.md
+  - 贡献指南: contributing.md
+  - 更新日志: changelog.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/username/project-name
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/project-name/
+
+extra_css:
+  - css/custom.css 

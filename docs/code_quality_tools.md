@@ -1,136 +1,165 @@
 # 代码质量工具指南
 
-## 工具级别分类
+本项目模板集成了一套完整的代码质量工具链，分为三个层次。每个层次都有其特定的用途和重要性。
 
-### 1. 基础级别 (Basic Level)
+## 工具链概述
 
-| 工具 | 版本 | 用途 | 配置文件 | 说明 |
-|------|------|------|----------|------|
-| black | ^24.0 | 代码格式化 | pyproject.toml | 自动格式化Python代码，统一代码风格 |
-| isort | ^5.13.0 | 导入排序 | pyproject.toml | 自动整理和分类导入语句 |
-| ruff | ^0.3.0 | 代码检查 | pyproject.toml | 快速的Python代码检查工具 |
-| mypy | ^1.8.0 | 类型检查 | pyproject.toml | 静态类型检查，验证类型注解 |
-| pytest | ^8.0 | 测试框架 | pyproject.toml | 单元测试和功能测试框架 |
+### 基础层工具
 
-### 2. 标准级别 (Standard Level)
-（包含基础级别所有工具）
+这些工具是最基本且必须运行的工具，它们能快速发现和修复常见问题。
 
-| 工具 | 版本 | 用途 | 配置文件 | 说明 |
-|------|------|------|----------|------|
-| pytest-cov | ^4.1.0 | 测试覆盖率 | pyproject.toml | 测试覆盖率报告生成 |
-| pylint | ^3.0.0 | 代码分析 | pyproject.toml | 深度代码分析，查找代码问题 |
-| bandit | ^1.7.7 | 安全检查 | pyproject.toml | Python代码安全漏洞检查 |
-| vulture | ^2.14 | 死代码检查 | pyproject.toml | 检测未使用的代码 |
+#### 1. Black
+- **用途**: 自动格式化 Python 代码
+- **运行方式**: `black .`
+- **配置**: `pyproject.toml` 中的 `[tool.black]` 部分
+- **特点**:
+  - 强制统一的代码风格
+  - 无需争论代码格式
+  - 自动修复格式问题
 
-### 3. 高级级别 (Advanced Level)
-（包含基础和标准级别所有工具）
+#### 2. isort
+- **用途**: 整理和格式化导入语句
+- **运行方式**: `isort .`
+- **配置**: `pyproject.toml` 中的 `[tool.isort]` 部分
+- **特点**:
+  - 按类别分组导入
+  - 删除未使用的导入
+  - 保持导入顺序一致
 
-| 工具 | 版本 | 用途 | 配置文件 | 说明 |
-|------|------|------|----------|------|
-| safety | ^2.3.0 | 依赖安全检查 | - | 检查依赖包的已知安全漏洞 |
-| xenon | ^0.9.1 | 代码复杂度检查 | - | 检查代码复杂度指标 |
-| radon | ^6.0.1 | 代码质量度量 | - | 计算代码质量指标 |
-| pytype | ^2024.2.27 | 类型检查 | pyproject.toml | Google的静态类型检查器 |
-| scalene | ^1.5.37 | 性能分析 | - | CPU和内存分析工具 |
+#### 3. Ruff
+- **用途**: 快速的 Python linter
+- **运行方式**: `ruff check .`
+- **配置**: `pyproject.toml` 中的 `[tool.ruff]` 部分
+- **特点**:
+  - 速度极快
+  - 包含多个检查器
+  - 可自动修复部分问题
 
-## 检查标准
+#### 4. MyPy
+- **用途**: 静态类型检查
+- **运行方式**: `mypy src tests`
+- **配置**: `pyproject.toml` 中的 `[tool.mypy]` 部分
+- **特点**:
+  - 验证类型注解
+  - 提前发现类型错误
+  - 改善代码可维护性
 
-### 1. 代码风格标准
+### 标准层工具
 
-- 行长度限制：88字符
-- 缩进：4个空格
-- 导入排序：按标准库、第三方库、本地模块分组
-- 类型注解：要求所有函数和方法都有类型注解
-- 文档字符串：使用Google风格
+这些工具提供更深入的代码分析，建议在提交代码前运行。
 
-### 2. 代码质量标准
+#### 1. Pylint
+- **用途**: 深度代码分析
+- **运行方式**: `pylint src tests`
+- **配置**: `pyproject.toml` 中的 `[tool.pylint]` 部分
+- **特点**:
+  - 全面的代码检查
+  - 代码风格检查
+  - 错误检测
+  - 重构建议
 
-- 测试覆盖率要求：
-  - 基础级别：>= 60%
-  - 标准级别：>= 80%
-  - 高级级别：>= 90%
+#### 2. Bandit
+- **用途**: 安全漏洞检查
+- **运行方式**: `bandit -r src`
+- **特点**:
+  - 发现潜在安全问题
+  - 提供安全最佳实践
+  - 支持自定义规则
 
-- 代码复杂度限制：
-  - 圈复杂度：<= 10
-  - 认知复杂度：<= 15
-  - 函数行数：<= 50
+#### 3. Vulture
+- **用途**: 查找死代码
+- **运行方式**: `vulture src`
+- **配置**: `pyproject.toml` 中的 `[tool.vulture]` 部分
+- **特点**:
+  - 识别未使用的代码
+  - 帮助保持代码库整洁
+  - 可配置检测灵敏度
 
-### 3. 安全标准
+### 高级层工具
 
-- 禁止使用不安全的函数和模块
-- 所有依赖包必须无已知安全漏洞
-- 敏感信息必须通过环境变量或安全存储管理
-- 定期更新依赖包版本
+这些工具用于更深层次的代码质量分析，建议在重要版本发布前运行。
 
-## 自动化检查
+#### 1. Safety
+- **用途**: 依赖安全检查
+- **运行方式**: `safety check`
+- **特点**:
+  - 检查已知漏洞
+  - 提供安全建议
+  - 定期更新漏洞数据库
 
-项目使用pre-commit钩子自动运行以下检查：
+#### 2. Xenon
+- **用途**: 代码复杂度检查
+- **运行方式**: `xenon --max-absolute A src`
+- **特点**:
+  - 检查代码复杂度
+  - 识别需要重构的代码
+  - 提供复杂度等级
 
-```yaml
-repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-    hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-yaml
-    -   id: check-added-large-files
+#### 3. Radon
+- **用途**: 代码度量分析
+- **运行方式**: `radon cc src`
+- **特点**:
+  - 计算圈复杂度
+  - 分析代码维护性
+  - 提供详细的度量报告
 
--   repo: https://github.com/psf/black
-    rev: 24.0.0
-    hooks:
-    -   id: black
+## 集成使用
 
--   repo: https://github.com/pycqa/isort
-    rev: 5.13.0
-    hooks:
-    -   id: isort
-
--   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.0
-    hooks:
-    -   id: ruff
-        args: [--fix]
-
--   repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0
-    hooks:
-    -   id: mypy
-        additional_dependencies: [types-all]
+### 1. 预提交检查
+项目已配置 pre-commit hooks，包含基础层的所有工具：
+```bash
+pre-commit install  # 安装 git hooks
+git commit -m "..."  # 提交时自动运行检查
 ```
+
+### 2. 持续集成
+在 CI 流程中，我们建议：
+1. 必须通过所有基础层工具
+2. 标准层工具作为 warning 报告
+3. 高级层工具在重要版本发布时运行
+
+### 3. 一键运行所有检查
+使用项目提供的脚本运行完整检查：
+```bash
+python scripts/run_quality_checks.py
+```
+
+## 常见问题处理
+
+### 1. 工具冲突处理
+- Black 和 isort 可能有格式冲突
+  - 解决：使用 `isort --profile black` 配置
+- Pylint 和 Black 的格式要求可能冲突
+  - 解决：在 pylintrc 中禁用相关检查
+
+### 2. 误报处理
+- Pylint 误报
+  - 使用 `# pylint: disable=错误代码` 注释
+- Vulture 误报
+  - 在 `vulture_whitelist.py` 中添加例外
+- Bandit 误报
+  - 使用 `# nosec` 注释
+
+### 3. 性能优化
+- 只对修改的文件运行检查
+- 使用缓存加速检查
+- 并行运行检查
 
 ## 最佳实践
 
 1. **渐进式采用**
-   - 从基础级别开始
-   - 逐步添加更多检查
+   - 先采用基础层工具
+   - 逐步引入更多检查
    - 根据项目需求调整配置
 
-2. **自动化集成**
-   - 使用pre-commit钩子
-   - 配置CI/CD流程
-   - 定期运行完整检查
+2. **定期更新**
+   - 保持工具版本最新
+   - 关注新的最佳实践
+   - 更新配置以适应新特性
 
-3. **持续改进**
-   - 定期更新工具版本
-   - 根据团队反馈调整规则
-   - 保持文档更新
-
-## 常见问题解决
-
-1. **工具冲突处理**
-   - black和pylint的格式化冲突：使用black兼容配置
-   - isort和black的冲突：设置isort profile = "black"
-   - ruff和其他工具的重叠：适当禁用重复规则
-
-2. **性能优化**
-   - 使用pre-commit的缓存功能
-   - 只检查修改的文件
-   - 并行运行检查
-
-3. **误报处理**
-   - 使用行内注释禁用特定警告
-   - 在配置文件中全局禁用特定规则
-   - 记录禁用原因
+3. **团队协作**
+   - 统一工具配置
+   - 共享最佳实践
+   - 定期代码审查
 
 更多详细配置示例和使用说明，请参考[配置示例]({{cookiecutter.project_slug}}/docs/code_quality_config.md)文档。 
