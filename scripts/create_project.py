@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 项目创建自动化脚本
 用于自动化执行项目模板文档中的所有步骤
@@ -23,13 +24,18 @@ def run_command(command: str, cwd: Optional[Path] = None) -> tuple[int, str, str
         (返回码, 标准输出, 标准错误)
     """
     try:
+        # 设置环境变量以处理编码问题
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+        
         result = subprocess.run(
             command,
             shell=True,
             cwd=cwd,
             capture_output=True,
             text=True,
-            check=False
+            check=False,
+            env=env
         )
         return result.returncode, result.stdout, result.stderr
     except Exception as e:
@@ -53,9 +59,9 @@ def check_prerequisites() -> bool:
     for tool, command in tools.items():
         code, out, err = run_command(command)
         if code == 0:
-            print(f"✓ {tool} 已安装: {out.strip()}")
+            print(f"[OK] {tool} 已安装: {out.strip()}")
         else:
-            print(f"✗ {tool} 未安装或有错误")
+            print(f"[ERROR] {tool} 未安装或有错误")
             all_installed = False
     
     return all_installed
@@ -95,7 +101,7 @@ def create_project(project_name: str, output_dir: Path) -> Optional[Path]:
     )
     
     if code != 0:
-        print(f"创建项目失败: {err}")
+        print(f"[ERROR] 创建项目失败: {err}")
         return None
     
     project_dir = output_dir / project_name.lower().replace(" ", "_")
@@ -114,29 +120,33 @@ def initialize_project(project_dir: Path) -> bool:
     print_step("初始化项目")
     
     # 安装依赖
-    print("安装项目依赖...")
+    print("[INFO] 安装项目依赖...")
     code, out, err = run_command("poetry install", project_dir)
     if code != 0:
-        print(f"安装依赖失败: {err}")
+        print(f"[ERROR] 安装依赖失败: {err}")
         return False
     
     # 安装 pre-commit 钩子
-    print("安装 pre-commit 钩子...")
+    print("[INFO] 安装 pre-commit 钩子...")
     code, out, err = run_command("poetry run pre-commit install", project_dir)
     if code != 0:
-        print(f"安装 pre-commit 钩子失败: {err}")
+        print(f"[ERROR] 安装 pre-commit 钩子失败: {err}")
         return False
     
     # 运行测试
-    print("运行测试...")
+    print("[INFO] 运行测试...")
     code, out, err = run_command("poetry run pytest", project_dir)
     if code != 0:
-        print(f"警告: 部分测试未通过: {err}")
+        print(f"[WARN] 部分测试未通过: {err}")
     
     return True
 
 def main() -> int:
     """主函数"""
+    # 设置输出编码
+    if sys.platform == "win32":
+        sys.stdout.reconfigure(encoding='utf-8')
+    
     parser = argparse.ArgumentParser(description="Python项目创建工具")
     parser.add_argument("project_name", help="项目名称")
     parser.add_argument(
@@ -150,7 +160,7 @@ def main() -> int:
     
     # 检查必要工具
     if not check_prerequisites():
-        print("\n请先安装所需工具后重试")
+        print("\n[ERROR] 请先安装所需工具后重试")
         return 1
     
     # 配置 Poetry 镜像源
@@ -165,8 +175,9 @@ def main() -> int:
     if not initialize_project(project_dir):
         return 1
     
-    print(f"\n✨ 项目创建成功！项目位置: {project_dir}")
-    print("\n下一步:")
+    print(f"\n[SUCCESS] 项目创建成功！")
+    print(f"[INFO] 项目位置: {project_dir}")
+    print("\n[INFO] 下一步:")
     print(f"  cd {project_dir}")
     print("  poetry shell  # 激活虚拟环境")
     
