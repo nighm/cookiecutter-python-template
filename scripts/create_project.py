@@ -9,37 +9,58 @@ import os
 import platform
 import subprocess
 import sys
+import time
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Tuple
 
-def run_command(command: str, cwd: Optional[Path] = None) -> tuple[int, str, str]:
+def run_command(command: str, cwd: Optional[Path] = None, retry: int = 3) -> Tuple[int, str, str]:
     """
     运行命令并返回结果
     
     Args:
         command: 要运行的命令
         cwd: 工作目录
+        retry: 重试次数
     
     Returns:
         (返回码, 标准输出, 标准错误)
     """
-    try:
-        # 设置环境变量以处理编码问题
-        env = os.environ.copy()
-        env["PYTHONIOENCODING"] = "utf-8"
-        
-        result = subprocess.run(
-            command,
-            shell=True,
-            cwd=cwd,
-            capture_output=True,
-            text=True,
-            check=False,
-            env=env
-        )
-        return result.returncode, result.stdout, result.stderr
-    except Exception as e:
-        return 1, "", str(e)
+    for i in range(retry):
+        try:
+            # 设置环境变量以处理编码问题
+            env = os.environ.copy()
+            env["PYTHONIOENCODING"] = "utf-8"
+            env["PYTHONUTF8"] = "1"
+            
+            result = subprocess.run(
+                command,
+                shell=True,
+                cwd=cwd,
+                capture_output=True,
+                text=True,
+                check=False,
+                env=env,
+                encoding='utf-8'
+            )
+            
+            # 如果命令成功或者不是网络错误，直接返回
+            if result.returncode == 0 or "connect to pypi.org failed" not in result.stderr:
+                return result.returncode, result.stdout, result.stderr
+            
+            # 如果是网络错误且还有重试次数，等待后重试
+            if i < retry - 1:
+                print(f"[WARN] 网络错误，{i + 1}/{retry} 次重试...")
+                time.sleep(2 ** i)  # 指数退避
+                continue
+            
+            return result.returncode, result.stdout, result.stderr
+            
+        except Exception as e:
+            if i < retry - 1:
+                print(f"[WARN] 执行出错，{i + 1}/{retry} 次重试...")
+                time.sleep(2 ** i)
+                continue
+            return 1, "", str(e)
 
 def print_step(step: str) -> None:
     """打印步骤信息"""
@@ -70,8 +91,17 @@ def setup_poetry_source() -> None:
     """配置 Poetry 镜像源"""
     print_step("配置 Poetry 镜像源")
     
+    # 移除已有的源配置
+    run_command("poetry source remove tuna", retry=1)
+    
     # 添加清华镜像源
-    run_command("poetry source add tuna https://pypi.tuna.tsinghua.edu.cn/simple/")
+    code, out, err = run_command("poetry source add tuna https://pypi.tuna.tsinghua.edu.cn/simple/")
+    if code != 0:
+        print("[WARN] 添加清华镜像源失败，尝试使用阿里云源...")
+        code, out, err = run_command("poetry source add aliyun https://mirrors.aliyun.com/pypi/simple/")
+        if code != 0:
+            print("[WARN] 添加镜像源失败，将使用默认源")
+    
     # 限制并发数以避免网络问题
     run_command("poetry config installer.max-workers 1")
 
@@ -146,6 +176,7 @@ def main() -> int:
     # 设置输出编码
     if sys.platform == "win32":
         sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
     
     parser = argparse.ArgumentParser(description="Python项目创建工具")
     parser.add_argument("project_name", help="项目名称")
