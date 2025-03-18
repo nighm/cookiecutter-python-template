@@ -73,3 +73,6 @@ config/.credentials.*
 config/secrets/
 config/*.key
 config/*.enc
+
+# 项目生成的测试目录
+demo/

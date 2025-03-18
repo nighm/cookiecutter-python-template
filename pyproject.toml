@@ -1,21 +1,22 @@
 # Poetry 项目配置文件
 [tool.poetry]
 name = "cookiecutter-python-template"  # 项目名称
-version = "0.2.1"  # 项目版本
-description = "A production-ready Python project template with comprehensive code quality tools"  # 项目描述
-authors = ["Your Name <your.email@example.com>"]  # 作者信息
+version = "1.0.0"  # 项目版本
+description = "一个现代化的 Python 项目模板，集成了最佳实践和工具链"  # 项目描述
+authors = ["nighm <nighm@example.com>"]  # 作者信息
 readme = "README.md"  # README文件路径
-packages = [{include = "src"}]  # 包含的源代码目录
+packages = [{include = "scripts"}]  # 包含的源代码目录
 
 # 项目依赖配置
 [tool.poetry.dependencies]
-python = ">=3.11.0,<3.12.0"  # Python版本要求
+python = "^3.11"
 pydantic = "^2.6.3"  # 数据验证库（最新稳定版）
 python-dotenv = "^1.0.1"  # 环境变量管理（最新稳定版）
 structlog = "^24.1.0"  # 结构化日志（最新稳定版）
 # 数据库支持
 sqlalchemy = "^2.0.27"  # SQL ORM（最新稳定版）
 psycopg2 = { version = "^2.9.9", optional = true }  # PostgreSQL驱动（最新稳定版）
+cookiecutter = "^2.6.0"
 
 # 开发依赖配置
 [tool.poetry.group.dev.dependencies]
@@ -39,6 +40,18 @@ sphinx-rtd-theme = "^2.0.0"  # Sphinx主题（最新稳定版）
 pre-commit = "^3.6.2"  # Git提交钩子（最新稳定版）
 
 # 构建系统配置
+
+
+
+
+
+
+
+[[tool.poetry.source]]
+name = "tuna"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "primary"
+
 [build-system]
 requires = ["poetry-core>=1.9.0"]  # 构建依赖（最新稳定版）
 build-backend = "poetry.core.masonry.api"  # 构建后端

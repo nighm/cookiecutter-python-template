@@ -7,6 +7,7 @@
 ### 1.1 工作目录设置
 
 #### Windows 系统
+
 ```powershell
 # 创建项目目录
 cd ~
@@ -15,6 +16,7 @@ cd projects
 ```
 
 #### Linux/MacOS 系统
+
 ```bash
 # 创建项目目录
 cd ~
@@ -31,6 +33,7 @@ cd projects
 3. **Cookiecutter**（项目模板工具）
 
 #### Windows 系统
+
 ```powershell
 # 1. 安装 Python 3.11
 pyenv install 3.11.8
@@ -44,6 +47,7 @@ pip install cookiecutter
 ```
 
 #### Linux/MacOS 系统
+
 ```bash
 # 1. 安装 Python 3.11
 pyenv install 3.11.8
@@ -82,6 +86,7 @@ cookiecutter https://github.com/nighm/cookiecutter-python-template.git
 ```
 
 系统会提示您输入以下信息：
+
 ```
 project_name [My Project]: 您的项目名称
 project_slug [my_project]: 项目目录名
@@ -100,66 +105,60 @@ use_github_actions [y]: 是否使用GitHub Actions
 在项目创建完成后，需要执行以下步骤来初始化项目：
 
 #### 2.2.1 进入项目目录
+
 ```bash
 cd <your_project_name>
 ```
 
 #### 2.2.2 初始化依赖管理
 
-首次使用时，建议配置国内镜像源以加快安装速度：
-```bash
-# 配置 pip 使用国内镜像源（推荐）
-pip config set global.index-url https://mirrors.ustc.edu.cn/pypi/web/simple
-pip config set global.trusted-host mirrors.ustc.edu.cn
+首次使用时，建议配置国内镜像源以加快安装速度。这个配置是全局的，只需要设置一次：
 
-# 或者配置 Poetry 使用国内镜像源
-poetry source add --priority=default aliyun https://mirrors.aliyun.com/pypi/simple/
+```bash
+# 配置 Poetry 使用清华镜像源（推荐）
+poetry source add tuna https://pypi.tuna.tsinghua.edu.cn/simple/
+
+# 如果遇到网络问题，可以限制并发数
+poetry config installer.max-workers 1
 ```
 
-安装项目依赖有两种方式：
+安装项目依赖：
 
-1. 使用 Poetry 安装（推荐但可能遇到网络问题）：
 ```bash
-# 生成 poetry.lock 文件
-poetry lock
-
-# 安装项目依赖
+# 使用 Poetry 安装（推荐）
 poetry install
 ```
 
-2. 如果 Poetry 安装失败，可以使用 pip 安装（更稳定的替代方案）：
-```bash
-# 在项目目录下执行
-pip install -e .
-```
-
-> 💡 **依赖安装说明**：
-> - Poetry 在解析依赖时可能需要访问 pypi.org
-> - 如果遇到网络问题，建议使用 pip 安装方式
-> - 两种安装方式的效果是相同的
-> - 安装完成后，可以使用 `pip list` 检查已安装的包
-> - `poetry.lock` 文件用于锁定项目所有依赖的精确版本
-> - 建议将 lock 文件提交到版本控制系统
+> 💡 **提示**：
+> 
+> - Poetry 的镜像源配置是全局的，配置一次后会一直生效
+> - 如果遇到网络问题，可以尝试限制并发数
+> - 安装完成后，可以使用 `poetry show` 检查已安装的包
 
 #### 2.2.3 初始化开发环境
 
 在开始开发之前，我们需要进行一系列的环境检查和初始化步骤：
 
 1. 检查Python环境
-```bash
-# 检查Python版本
-python --version
+   
+   ```bash
+   # 检查Python版本
+   python --version
+   ```
 
 # 检查pip版本
+
 pip --version
 
 # 检查Poetry版本
+
 poetry --version
 
 # 检查当前Python解释器路径
-where python
-```
 
+where python
+
+```
 2. 检查虚拟环境状态
 ```bash
 # 查看Poetry的虚拟环境列表
@@ -178,50 +177,52 @@ poetry env activate  # 激活环境
 ```
 
 3. 验证虚拟环境激活状态
-```bash
-# 检查当前Python解释器路径，应该指向虚拟环境
-where python
+   
+   ```bash
+   # 检查当前Python解释器路径，应该指向虚拟环境
+   where python
+   ```
 
 # 检查pip安装位置，应该指向虚拟环境
+
 pip -V
 
 # 在PowerShell中，可以通过以下命令查看当前虚拟环境
-$env:VIRTUAL_ENV
-```
 
+$env:VIRTUAL_ENV
+
+```
 4. 安装项目包（开发模式）
 ```bash
-# 确保在项目根目录下
-pip install -e .
-
-# 或使用poetry安装
+# 使用 Poetry 安装（推荐）
 poetry install
+
+# 备选方案：如果 Poetry 安装遇到问题，可以使用 pip
+pip install -e .
 ```
 
 5. 安装pre-commit钩子
-```bash
-# 安装pre-commit钩子
-poetry run pre-commit install
+   
+   ```bash
+   # 使用 Poetry 运行 pre-commit 安装（推荐）
+   poetry run pre-commit install
+   ```
 
 # 验证pre-commit安装
-poetry run pre-commit --version
-```
 
+poetry run pre-commit --version
+
+```
 6. 常见问题排查：
 - 如果找不到python_project_template模块：
-  - 检查是否已在开发模式下安装项目：`pip list | findstr python-project-template`
-  - 检查PYTHONPATH是否包含项目根目录
-  - 检查项目是否有正确的setup.py或pyproject.toml
+  - 检查是否已使用 Poetry 安装项目：`poetry show`
+  - 检查虚拟环境是否正确激活：`poetry env info`
+  - 检查项目是否有正确的 pyproject.toml
 
-- 如果虚拟环境未正确激活：
-  - 检查$env:VIRTUAL_ENV环境变量
-  - 检查Python解释器路径
-  - 尝试重新激活环境
-
-- 如果依赖安装失败：
+- 如果遇到依赖安装问题：
   - 检查网络连接
-  - 验证pip源配置：`pip config list`
-  - 检查poetry源配置：`poetry config --list`
+  - 确认 Poetry 镜像源配置：`poetry config --list`
+  - 尝试清理缓存：`poetry cache clear . --all`
 
 #### 2.2.4 验证安装
 ```bash
@@ -232,34 +233,22 @@ poetry run pytest
 poetry run pre-commit run --all-files
 ```
 
-#### 2.2.5 故障排除
-
-如果在初始化过程中遇到问题，可以参考以下解决方案：
-
-- 依赖安装失败
-  - 检查网络连接
-  - 确保镜像源配置正确
-  - 确保 Python 版本符合要求
-
-- lock 文件生成失败
-  ```bash
-  # 尝试使用 --no-update 选项
-  poetry lock --no-update
-  ```
-
 ### 2.3 快速创建选项
 
 1. **使用默认值创建**：
+   
    ```bash
    cookiecutter https://github.com/nighm/cookiecutter-python-template.git --no-input
    ```
 
 2. **使用特定版本**：
+   
    ```bash
    cookiecutter https://github.com/nighm/cookiecutter-python-template.git --checkout v1.0.0
    ```
 
 3. **离线创建**：
+   
    ```bash
    # 克隆模板
    git clone https://github.com/nighm/cookiecutter-python-template.git
@@ -286,44 +275,37 @@ poetry run pre-commit run --all-files
 
 详细的目录说明请参考 [项目结构文档](project_structure.md)。
 
-## 4. 项目配置
+## 4. 开发工作流
 
-### 4.1 依赖安装
-
-```bash
-# 进入项目目录
-cd 您的项目名称
-
-# 安装依赖
-poetry install
-```
-
-如果遇到网络问题，可以使用国内镜像：
-```bash
-# 配置镜像源
-poetry config repositories.aliyun https://mirrors.aliyun.com/pypi/simple/
-
-# 重新安装
-poetry install
-```
-
-### 4.2 开发环境设置
+### 4.1 环境管理
 
 ```bash
-# 安装 pre-commit hooks
-poetry run pre-commit install
-
-# 初始化虚拟环境
+# 激活虚拟环境
 poetry shell
+
+# 或者在不进入 shell 的情况下运行命令
+poetry run <命令>
+
+# 查看已安装的依赖
+poetry show
+
+# 添加新依赖
+poetry add <包名>
+
+# 添加开发依赖
+poetry add --group dev <包名>
 ```
 
-## 5. 开发工作流
-
-### 5.1 代码质量检查
+### 4.2 代码质量检查
 
 ```bash
-# 运行所有检查
+# 运行所有代码质量检查
 poetry run pre-commit run --all-files
+
+# 运行单个工具
+poetry run black .
+poetry run ruff check .
+poetry run mypy src
 
 # 运行测试
 poetry run pytest
@@ -332,7 +314,7 @@ poetry run pytest
 poetry run pytest --cov=src
 ```
 
-### 5.2 文档维护
+### 4.3 文档维护
 
 ```bash
 # 构建文档
@@ -342,32 +324,27 @@ cd docs && poetry run make html
 poetry run python -m http.server --directory docs/_build/html 8000
 ```
 
-## 6. 常见问题
+## 5. 常见问题
 
-### 6.1 依赖安装问题
+### 5.1 依赖管理问题
 
-如果 Poetry 安装依赖失败：
+如果遇到依赖安装问题：
+
 1. 检查网络连接
-2. 使用国内镜像源
-3. 尝试手动安装：
-   ```bash
-   pip install -r <(poetry export --dev)
-   ```
+2. 确认镜像源配置：`poetry config --list`
+3. 尝试清理缓存：`poetry cache clear . --all`
+4. 更新 Poetry 锁文件：`poetry lock --no-update`
 
-### 6.2 代码检查问题
+### 5.2 代码质量问题
 
 如果代码检查不通过：
-1. 运行自动修复：
-   ```bash
-   poetry run black .
-   poetry run ruff --fix .
-   ```
-2. 查看详细错误信息：
-   ```bash
-   poetry run mypy src
-   ```
 
-## 7. 更多资源
+1. 查看具体错误：`poetry run pre-commit run --all-files -v`
+2. 自动修复格式：`poetry run black .`
+3. 自动修复导入：`poetry run ruff --fix .`
+4. 检查类型问题：`poetry run mypy src`
+
+## 6. 更多资源
 
 - [完整文档](https://项目文档地址)
 - [问题反馈](https://github.com/用户名/项目名/issues)
