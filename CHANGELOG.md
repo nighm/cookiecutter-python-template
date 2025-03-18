@@ -1,39 +1,40 @@
 # 更新日志
 
-本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/) 和 [如何维护更新日志](https://keepachangelog.com/zh-CN/) 规范。
+本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/) 进行版本管理。
 
-## [未发布]
+## [1.0.0] - 2025-03-18
 
 ### 新增
-- 初始项目模板
-- Poetry 依赖管理
-- 代码质量工具链集成
-- 自动化测试框架
-- GitHub Actions CI/CD
-- MkDocs 文档系统
+- 添加模板和依赖包的本地缓存机制
+- 实现模板版本自动检查和更新功能
+- 增加 `--no-cache` 选项支持强制在线更新
+- 添加详细的调试日志输出
+- 完整的错误处理和重试机制
+- 全面的文档和使用说明
 
-### 变更
-- 无
+### 改进
+- 优化网络连接重试逻辑，使用指数退避策略
+- 改进错误处理和用户提示信息
+- 增强项目创建过程的稳定性
+- 优化 Poetry 依赖安装流程
+- 完善的缓存管理机制
 
 ### 修复
-- 修复 data_processor 中的性能问题和返回值不一致问题
-- 优化数据处理逻辑，移除不必要的字符串重复操作
+- 修复 Windows 环境下的编码问题
+- 修复只读文件删除失败的问题
+- 修复网络不稳定时的创建失败问题
 
-### 移除
-- 无
-
-## [0.1.0] - 2024-03-14
+## [0.1.0] - 2025-03-14
 
 ### 新增
-- 项目基础结构
-- 基本文档框架
-- 示例代码和测试
-- 开发工具配置
+- 初始版本发布
+- 基本的项目创建功能
+- 文档框架和示例代码
 - CI/CD 配置
 
 ### 变更
-- 更新 Python 依赖版本要求至 3.11
-- 优化项目文档结构
+- 更新 Python 依赖要求
+- 优化文档结构
 
 ### 修复
 - 修复测试框架配置问题
@@ -63,5 +64,5 @@
 ### 安全
 - 安全性更新
 
-[未发布]: https://github.com/username/project/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/username/project/releases/tag/v0.1.0 
+[1.0.0]: https://github.com/nighm/cookiecutter-python-template/releases/tag/v1.0.0
+[0.1.0]: https://github.com/nighm/cookiecutter-python-template/releases/tag/v0.1.0 
