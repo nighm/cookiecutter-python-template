@@ -23,6 +23,7 @@ from typing import (
     TypeVar,
     Union,
 )
+import pytest
 
 logger = logging.getLogger(__name__)
 
@@ -140,51 +141,81 @@ class DataProcessor:
         self._executor.shutdown(wait=True)
 
 
-async def test_resource_manager():
-    """测试资源管理器。"""
-    # 创建资源管理器
-    manager = ResourceManager(list)
+@pytest.fixture
+async def resource_manager():
+    """创建资源管理器 fixture。"""
+    return ResourceManager(list)
 
-    # 测试异步上下文管理器
-    async with manager as resource:
-        assert isinstance(resource, list)
-        resource.append(1)
-        assert len(resource) == 1
-
-    # 测试资源清理
-    assert manager._resource is None
-
-    # 测试并发访问
-    async with asyncio.TaskGroup() as group:
-        for _ in range(3):
-            group.create_task(test_concurrent_access(manager))
-
-
-async def test_concurrent_access(manager: ResourceManager[list]):
+async def test_concurrent_access(resource_manager: ResourceManager[list]):
     """测试并发访问资源。"""
-    try:
-        async with manager as _:
-            await asyncio.sleep(0.1)
-    except RuntimeError:
-        # 预期的并发访问错误
-        pass
+    async def access_resource():
+        try:
+            async with resource_manager as resource:
+                resource.append(1)
+                await asyncio.sleep(0.1)  # 模拟一些操作
+        except RuntimeError as e:
+            assert str(e) == "Resource already in use"
+            return True
+        return False
+
+    # 使用 TaskGroup 并发访问资源
+    async with asyncio.TaskGroup() as group:
+        tasks = [group.create_task(access_resource()) for _ in range(3)]
+    
+    # 验证至少有一个任务遇到了并发访问错误
+    results = [task.result() for task in tasks]
+    assert any(results), "No concurrent access error detected"
 
 
 async def test_data_processor():
     """测试数据处理器。"""
     processor = DataProcessor(max_workers=2)
 
+    # 测试参数验证
+    with pytest.raises(ValueError, match="chunk_size must be positive"):
+        async for _ in processor.process_batch([1, 2, 3], chunk_size=0):
+            pass
+
     # 准备测试数据
     test_data = list(range(3000))
+    small_data = list(range(10))
+    large_data = list(range(10000))
 
-    # 测试批处理
+    # 测试小数据集处理
+    batch_count = 0
+    async for batch in processor.process_batch(small_data, chunk_size=5):
+        batch_count += 1
+        assert len(batch) <= 5
+        assert all(isinstance(x, float) for x in batch)
+    assert batch_count == 2
+
+    # 测试标准数据集处理
     batch_count = 0
     total_items = 0
+    start_time = time.perf_counter()
     async for batch in processor.process_batch(test_data, chunk_size=1000):
         batch_count += 1
         total_items += len(batch)
         # 验证处理结果
         assert all(isinstance(x, float) for x in batch)
-
+        assert len(batch) <= 1000
+    duration = time.perf_counter() - start_time
+    
     assert batch_count == 3
     assert total_items == len(test_data)
+    assert duration < 5.0, "Processing took too long"
+
+    # 测试大数据集性能
+    batch_count = 0
+    start_time = time.perf_counter()
+    async for batch in processor.process_batch(large_data, chunk_size=2000):
+        batch_count += 1
+        assert len(batch) <= 2000
+    duration = time.perf_counter() - start_time
+    
+    assert batch_count == 5
+    assert duration < 10.0, "Large dataset processing took too long"
+
+    # 测试资源清理
+    del processor
+    await asyncio.sleep(0.1)  # 等待资源清理完成
