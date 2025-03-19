@@ -34,7 +34,7 @@ def remove_paths(paths):
 def init_git():
     """Initialize git repository."""
     if not check_command_exists("git"):
-        print("⚠️ Git is not installed. Skipping repository initialization.")
+        print("[WARN] Git is not installed. Skipping repository initialization.")
         return False
 
     try:
@@ -51,15 +51,15 @@ def init_git():
         )
         return True
     except subprocess.CalledProcessError as e:
-        print(f"⚠️ Failed to initialize git repository: {e}")
+        print(f"[ERROR] Failed to initialize git repository: {e}")
         return False
 
 
 def setup_poetry():
     """Set up poetry environment."""
     if not check_command_exists("poetry"):
-        print("❌ Poetry is not installed. Please install it first.")
-        print("   https://python-poetry.org/docs/#installation")
+        print("[ERROR] Poetry is not installed. Please install it first.")
+        print("        https://python-poetry.org/docs/#installation")
         return False
 
     try:
@@ -77,11 +77,11 @@ def setup_poetry():
             try:
                 subprocess.run(["poetry", "run", "pre-commit", "install"], check=True)
             except subprocess.CalledProcessError:
-                print("⚠️ Failed to install pre-commit hooks. This is not critical.")
+                print("[WARN] Failed to install pre-commit hooks. This is not critical.")
         
         return True
     except subprocess.CalledProcessError as e:
-        print(f"❌ Failed to set up Poetry environment: {e}")
+        print(f"[ERROR] Failed to set up Poetry environment: {e}")
         return False
 
 
@@ -89,14 +89,14 @@ def setup_env():
     """Set up environment files."""
     if Path(".env.example").exists():
         shutil.copy(".env.example", ".env")
-        print("📝 Created .env file from .env.example")
+        print("[INFO] Created .env file from .env.example")
         return True
     return False
 
 
 def main():
     """Main function."""
-    print("🚀 Starting project setup...")
+    print("[START] Starting project setup...")
 
     success = True
     try:
@@ -128,27 +128,27 @@ def main():
         ):
             paths_to_remove.append(".env.example")
 
-        print("🗑️  Removing unnecessary files...")
+        print("[INFO] Removing unnecessary files...")
         remove_paths(paths_to_remove)
 
-        print("📦 Setting up Poetry environment...")
+        print("[INFO] Setting up Poetry environment...")
         if not setup_poetry():
-            print("⚠️ Poetry setup failed, but continuing with project creation...")
+            print("[WARN] Poetry setup failed, but continuing with project creation...")
 
-        print("🔧 Setting up environment...")
+        print("[INFO] Setting up environment...")
         setup_env()
 
-        print("🔧 Initializing Git repository...")
+        print("[INFO] Initializing Git repository...")
         if not init_git():
-            print("⚠️ Git initialization failed, but continuing with project creation...")
+            print("[WARN] Git initialization failed, but continuing with project creation...")
 
         if success:
-            print("✨ Project setup completed successfully!")
+            print("[SUCCESS] Project setup completed successfully!")
         else:
-            print("⚠️ Project setup completed with some warnings.")
+            print("[WARN] Project setup completed with some warnings.")
 
     except Exception as e:
-        print(f"❌ Error during setup: {e}")
+        print(f"[ERROR] Error during setup: {e}")
         return 1
 
     return 0 if success else 1

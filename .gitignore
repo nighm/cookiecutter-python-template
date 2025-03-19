@@ -76,3 +76,11 @@ config/*.enc
 
 # 项目生成的测试目录
 demo/
+
+# 临时项目目录
+temp_project/
+test-project/
+
+# 保留 _temp_storage 但忽略其内容
+_temp_storage/*
+!_temp_storage/.gitkeep

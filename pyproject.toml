@@ -9,7 +9,7 @@ packages = [{include = "scripts"}]  # 包含的源代码目录
 
 # 项目依赖配置
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11.0,<3.12.0"
 pydantic = "^2.6.3"  # 数据验证库（最新稳定版）
 python-dotenv = "^1.0.1"  # 环境变量管理（最新稳定版）
 structlog = "^24.1.0"  # 结构化日志（最新稳定版）
@@ -17,8 +17,10 @@ structlog = "^24.1.0"  # 结构化日志（最新稳定版）
 sqlalchemy = "^2.0.27"  # SQL ORM（最新稳定版）
 psycopg2 = { version = "^2.9.9", optional = true }  # PostgreSQL驱动（最新稳定版）
 cookiecutter = "^2.6.0"
+tqdm = "^4.66.2"  # 进度条支持
 
 # 开发依赖配置
+requests = "^2.32.3"
 [tool.poetry.group.dev.dependencies]
 # 代码质量工具
 black = "^24.2.0"  # 代码格式化（最新稳定版）
@@ -47,9 +49,12 @@ pre-commit = "^3.6.2"  # Git提交钩子（最新稳定版）
 
 
 
+
+
+
 [[tool.poetry.source]]
 name = "tuna"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+url = "https:\\\\pypi.tuna.tsinghua.edu.cn\\simple\\"
 priority = "primary"
 
 [build-system]
