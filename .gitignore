@@ -84,3 +84,17 @@ test-project/
 # 保留 _temp_storage 但忽略其内容
 _temp_storage/*
 !_temp_storage/.gitkeep
+
+# 测试生成的项目目录
+python_project_template/
+test_demo/
+test*/
+
+# IDE specific
+.idea/
+.vscode/
+*.code-workspace
+
+# Local development
+.python-version
+poetry.lock
