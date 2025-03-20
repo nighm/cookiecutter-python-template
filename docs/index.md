@@ -1,157 +1,143 @@
-# Python项目模板使用指南
+# Python项目模板文档
 
-## 快速开始
+欢迎使用Python项目模板！这是一个全面的、注重代码质量的Python项目模板。
 
-### 前置条件
-- Python 3.11+ (推荐3.11.x，目前已验证)
-- Poetry 包管理工具
-- Git (用于版本控制)
+## 🚀 快速导航
 
-### 创建新项目
-1. 创建工作目录:
-   ```powershell
-   # 在用户目录下创建 projects 文件夹（如果不存在）
-   mkdir %USERPROFILE%\projects
-   
-   # 切换到 projects 目录
-   cd %USERPROFILE%\projects
-   ```
+### 入门指南
+- [快速开始](quick_start.md) - 5分钟内创建你的第一个项目
+- [新手指南](beginner_guide.md) - Python项目开发的基础知识
+- [学习指南](learning_guide.md) - 深入学习模板提供的功能
 
-2. 安装 cookiecutter:
-   ```bash
-   pip install cookiecutter
-   ```
+### 开发指南
+- [项目结构](project_details.md) - 了解项目的文件组织
+- [开发指南](development_guide.md) - 开发流程和最佳实践
+- [测试指南](testing_guide.md) - 编写和运行测试
+- [文档指南](documentation_guide.md) - 编写和维护文档
 
-3. 使用模板创建项目:
-   ```bash
-   cookiecutter https://github.com/your-username/cookiecutter-python-template.git
-   ```
+### 代码质量
+- [代码质量概述](code_quality.md) - 代码质量控制的重要性
+- [质量工具](code_quality_tools.md) - 集成的代码质量工具
+- [质量等级](quality_levels.md) - 基础/标准/高级质量控制
+- [工具集成](quality_integration.md) - 配置和使用质量工具
 
-4. 按提示填写项目信息:
-   - project_name: 项目名称
-   - project_slug: 项目标识符(用作包名)
-   - project_description: 项目描述
-   - author_name: 作者姓名
-   - author_email: 作者邮箱
+## 📦 核心功能
 
-5. 初始化项目:
-   ```bash
-   cd your-project-name
-   poetry install
-   poetry shell
-   pre-commit install
-   ```
+### 1. 项目管理
+- 使用Poetry进行依赖管理
+- 标准化的项目结构
+- 版本控制最佳实践
 
-## 项目结构
+### 2. 代码质量
+- 自动代码格式化
+- 静态类型检查
+- 代码风格检查
+- 安全性检查
 
-```
-your-project-name/
-├── src/
-│   └── your_package/
-│       ├── __init__.py
-│       └── core/
-├── tests/
-│   ├── __init__.py
-│   └── test_*.py
-├── docs/
-│   └── *.md
-├── scripts/
-│   └── run_quality_checks.py
-├── .env.example
-├── .pre-commit-config.yaml
-├── pyproject.toml
-├── README.md
-└── CHANGELOG.md
+### 3. 开发工具
+- 预配置的开发环境
+- 自动化测试框架
+- 文档生成工具
+- CI/CD配置
+
+### 4. 最佳实践
+- 类型注解支持
+- 现代Python特性
+- 安全性考虑
+- 性能优化
+
+## 🔧 常用命令
+
+### 项目创建
+```bash
+# 安装cookiecutter
+pip install cookiecutter
+
+# 创建新项目
+cookiecutter https://github.com/your-username/cookiecutter-python-template.git
 ```
 
-## 代码质量工具
-
-本模板集成了三个层次的代码质量检查工具：
-
-### 基础层
-- **black**: 代码格式化
-- **isort**: 导入语句排序
-- **ruff**: 快速代码检查
-- **mypy**: 类型检查
-- **pydocstyle**: 文档风格检查
-- **pytest**: 单元测试
-
-### 标准层
-- **pytest-cov**: 测试覆盖率
-- **pylint**: 深度代码分析
-- **bandit**: 安全检查
-- **vulture**: 死代码检测
-
-### 高级层
-- **safety**: 依赖安全检查
-- **xenon**: 代码复杂度检查
-- **radon**: 代码度量
-
-## 常用命令
-
-### 开发相关
+### 开发环境
 ```bash
 # 安装依赖
 poetry install
 
-# 激活虚拟环境
+# 激活环境
 poetry shell
+
+# 安装pre-commit hooks
+pre-commit install
+```
+
+### 质量检查
+```bash
+# 运行所有质量检查
+make check
 
 # 运行测试
 pytest
 
-# 运行带覆盖率的测试
+# 检查代码覆盖率
 pytest --cov=src
-
-# 运行代码质量检查
-python scripts/run_quality_checks.py
 ```
 
-### 文档相关
-```bash
-# 构建文档
-mkdocs build
+## 📚 模块文档
 
-# 本地预览文档
-mkdocs serve
-```
+### 核心模块
+- [配置管理](api/config.md) - 项目配置管理
+- [核心功能](api/core.md) - 核心功能实现
+- [工具函数](api/utils.md) - 通用工具函数
 
-## 最佳实践
+### 扩展模块
+- [数据处理](api/data_processor.md) - 数据处理功能
+- [CLI工具](api/cli.md) - 命令行工具
+- [Web应用](api/web.md) - Web应用开发
 
-### 1. 代码组织
-- 使用 `src` 布局组织源代码
-- 测试文件与源文件保持相同的结构
-- 使用 `__init__.py` 定义公共API
+## 🤝 贡献指南
 
-### 2. 依赖管理
-- 使用 `poetry add` 添加新依赖
-- 使用 `poetry add -D` 添加开发依赖
-- 定期更新依赖 `poetry update`
+我们欢迎各种形式的贡献，包括但不限于：
+- 报告问题
+- 提交改进建议
+- 完善文档
+- 提交代码
 
-### 3. 版本控制
-- 遵循语义化版本规范
-- 使用 pre-commit hooks 保证代码质量
-- 保持 CHANGELOG.md 更新
+详细信息请参考[贡献指南](CONTRIBUTING.md)。
 
-### 4. 测试规范
-- 编写单元测试覆盖核心功能
-- 使用 pytest fixtures 复用测试代码
-- 保持测试简单、独立、可重复
+## 📝 更新日志
 
-## 常见问题
+查看[更新日志](CHANGELOG.md)了解项目的版本历史。
 
-### Q: 如何添加新的依赖？
-A: 使用 `poetry add package_name` 添加依赖，或手动编辑 `pyproject.toml` 后运行 `poetry install`。
+## ❓ 常见问题
 
-### Q: 如何运行特定的测试？
-A: 使用 `pytest tests/test_specific.py -v` 运行特定测试文件，或 `pytest -k "test_name"` 运行特定测试函数。
+### 环境相关
+1. **如何解决依赖冲突？**
+   - 使用 `poetry show --tree` 查看依赖树
+   - 手动指定兼容版本
+   - 必要时使用 `poetry add package@version`
 
-### Q: 如何处理代码质量工具的错误？
-A: 
-1. 先运行 `black` 和 `isort` 修复格式问题
-2. 使用 `ruff` 检查并修复基本问题
-3. 根据 `mypy` 提示修复类型问题
-4. 最后处理 `pylint` 的警告
+2. **如何处理Python版本问题？**
+   - 确保使用Python 3.11+
+   - 使用pyenv管理多个Python版本
+   - 检查.python-version文件
 
-## 更新日志
-详见 [CHANGELOG.md](../CHANGELOG.md)
+### 开发相关
+1. **如何添加新功能？**
+   - 创建功能分支
+   - 编写测试用例
+   - 实现功能代码
+   - 提交PR请求
+
+2. **如何处理代码质量问题？**
+   - 运行 `make format` 自动格式化
+   - 使用 `make lint` 检查代码
+   - 按工具建议逐步修复
+
+## 📞 获取帮助
+
+- 提交Issue: GitHub Issues
+- 文档网站: Read the Docs
+- 邮件支持: support@example.com
+
+## 📜 许可证
+
+本项目采用MIT许可证 - 查看[LICENSE](LICENSE)文件了解详情。
